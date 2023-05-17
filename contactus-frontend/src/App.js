@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./styles.css";
 import ConnectWalletButton from './ConnectWalletButton.js';
+import { RecoilRoot } from 'recoil';
 const nacl = require('tweetnacl');
 const { Buffer } = require('buffer');
 
@@ -41,7 +42,7 @@ function App() {
   };
 
   return (
-    <>
+    <RecoilRoot>
       <h1>Contact Us</h1>
       <ConnectWalletButton />
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -55,7 +56,7 @@ function App() {
         <textarea style={{width: '100%', 'min-height': '8em', boxSizing: 'border-box', resize: 'none' }} {...register("textArea")} ></textarea>
         <input type="submit" />
       </form>
-    </>
+    </RecoilRoot>
   );
 }
 
