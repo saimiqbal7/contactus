@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./styles.css";
+import ConnectWalletButton from './ConnectWalletButton.js';
 const nacl = require('tweetnacl');
 const { Buffer } = require('buffer');
 
@@ -42,6 +43,7 @@ function App() {
   return (
     <>
       <h1>Contact Us</h1>
+      <ConnectWalletButton />
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>Email</label>
         <input {...register("email", { required: true })} />
