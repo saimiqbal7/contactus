@@ -20,8 +20,8 @@ async function testdb() {
   // await db.setContact(pubkey, contact);
 
   // TEST get contact list
-  // let contactList = await db.getAllContacts();
-  // console.log("Get All Contacts", contactList);
+  let contactList = await db.getAllContacts();
+  console.log("Get All Contacts", contactList);
 
   // TEST get proofs db
   // let proofs = await db.getProofs(pubkey);

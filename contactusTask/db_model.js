@@ -5,7 +5,7 @@ ensureIndex();
 
 // db functions for contact
 const getContact = async publicKey => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   const contactId = getContactId(publicKey);
   try {
     const resp = await db.findOne({ contactId });
@@ -21,7 +21,7 @@ const getContact = async publicKey => {
 };
 
 const setContact = async (publicKey, contact) => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   try {
     const contactId = getContactId(publicKey);
     console.log('Set contact', { contactId, contact });
@@ -34,7 +34,7 @@ const setContact = async (publicKey, contact) => {
 };
 
 const getAllContacts = async () => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   const contactListRaw = await db.find({
     contact: { $exists: true },
   });
@@ -44,7 +44,7 @@ const getAllContacts = async () => {
 
 // namespaceWrapper.levelDB functions for proofs
 const getProofs = async (pubkey) => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   const proofsId = getProofsId(pubkey);
   try {
     const resp = await db.findOne({ proofsId });
@@ -60,7 +60,7 @@ const getProofs = async (pubkey) => {
 };
 
 const setProofs = async (pubkey, proofs) => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   try {
     const proofsId = getProofsId(pubkey);
     await db.insert({ proofsId, proofs });
@@ -71,7 +71,7 @@ const setProofs = async (pubkey, proofs) => {
 };
 
 const getAllProofs = async () => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   const proofsListRaw = await db.find({
     proofs: { $exists: true },
   });
@@ -81,7 +81,7 @@ const getAllProofs = async () => {
 
 // db functions for node proofs
 const getNodeProofCid = async (round) => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   const NodeproofsListRaw = await db.find({
     cid: { $exists: true },
   });
@@ -92,7 +92,7 @@ const getNodeProofCid = async (round) => {
 };
 
 const setNodeProofCid = async (round, cid) => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   try {
     const NodeProofsCidId = getNodeProofCidid(round);
     await db.insert({ NodeProofsCidId, cid });
@@ -103,7 +103,7 @@ const setNodeProofCid = async (round, cid) => {
 };
 
 const getAllNodeProofCids = async () => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   const NodeproofsListRaw = await db.find({
     cid: { $exists: true },
   });
@@ -115,7 +115,7 @@ const getAllNodeProofCids = async () => {
 
 //db functions fro Auth list
 const getAuthList = async (pubkey) => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   const authListId = getauthListid(pubkey);
   try {
     const resp = await db.findOne({ authListId });
@@ -129,7 +129,7 @@ const getAuthList = async (pubkey) => {
 };
 
 const setAuthList = async (pubkey) => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   try {
     const authListId = getauthListid(pubkey);
     await db.insert({ authListId, cid });
@@ -140,7 +140,7 @@ const setAuthList = async (pubkey) => {
 };
 
 const getAllAuthLists = async (values) => {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
   const authListRaw = await db.find({
     authList: { $exists: true },
   });

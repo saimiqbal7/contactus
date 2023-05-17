@@ -1,8 +1,8 @@
 const {namespaceWrapper} = require('../namespaceWrapper');
 
-console.log('namespaceWrapper', namespaceWrapper);
+
 async function ensureIndex() {
-  const db = await namespaceWrapper.getDB();
+  const db = await namespaceWrapper.getDb();
     db.ensureIndex(
       { fieldName: 'contactId', unique: true, sparse: true },
       function (err) {
