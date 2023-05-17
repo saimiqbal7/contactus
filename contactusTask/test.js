@@ -2,7 +2,7 @@ const axios = require('axios');
 
 async function getCIDs() {
   try {
-    // const callURL = await axios.get(`https://`);
+    // const response = await axios.get(`https://`);
 
     const CIDs = [
       'bafybeidj4gqtw4of4kcgqhfel7uapeqhxmebafyifwliijdel6l7ldulym',
