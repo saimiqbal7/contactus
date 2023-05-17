@@ -9,12 +9,10 @@ const bs58 = require('bs58');
 const solanaWeb3 = require('@solana/web3.js');
 const nacl = require('tweetnacl');
 const fs = require('fs');
-const db = require('./db_model');
 const routes = require('./routes');
 const path = require('path');
 
 async function setup() {
-  await namespaceWrapper.getDb();
 
   const originalConsoleLog = console.log;
   const logDir = './namespace';
