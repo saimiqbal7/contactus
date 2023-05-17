@@ -11,7 +11,15 @@ Task nodes ip address to post the data to it
 
 # The task node
 
-The task nodes running the task are responsible for  holding the encrypted payload
+The task nodes running the contact-us task are responsible for  holding the encrypted payload.
+
+Contact-us task provide REST endpoints to interact with the task node:
+
+- POST /contact/
+    This endpoint will receive the encrypted payload and store it in the task node database. Then the data will also uploaded to the IPFS and store the return cid.
+
+- GET /proofs
+    This endpoint will return all the proofs that the task node has. The data will be the cid of the data on the IPFS. The encrypted data will be stored in these cid and the task creator will be able to retrieve it using the cid. Creator can use the private key to decrypt the data and read the feedback.
 
 # The back end 
 
