@@ -82,13 +82,18 @@ const getAllProofs = async () => {
 // db functions for node proofs
 const getNodeProofCid = async (round) => {
   const db = await namespaceWrapper.getDb();
-  const NodeproofsListRaw = await db.find({
-    cid: { $exists: true },
-  });
-  let NodeproofsList = NodeproofsListRaw.map(
-    NodeproofsList => NodeproofsList.cid,
-  );
-  return NodeproofsList;
+  const NodeProofsCidId = getNodeProofCidid(round);
+  try {
+    const resp = await db.findOne({ NodeProofsCidId });
+    if (resp) {
+      return resp.proofs;
+    } else {
+      return null;
+    }
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
 };
 
 const setNodeProofCid = async (round, cid) => {

@@ -18,23 +18,11 @@ try {
   console.log('publicKey', bs58.encode(publicKey));
   const data = {
     uuid: uuidv4(),
-    contact: [
-      {
-        key: 'official',
-        label: 'Official Website',
-        redirectUrl: 'https://spheron.network/',
-      },
-      {
-        key: 'twitter',
-        label: 'Twitter',
-        redirectUrl: 'https://twitter.com/blockchainbalak',
-      },
-      {
-        key: 'github',
-        label: 'GitHub',
-        redirectUrl: 'https://github.com/spheronFdn/',
-      },
-    ],
+    contact: {
+      name: 'test',
+      email: 'test@gmail.com',
+      message: 'test message',
+    },
     timestamp: Date.now(),
   }
   const messageUint8Array = new Uint8Array(
@@ -52,7 +40,7 @@ try {
   // console.log(payload);
   
   await axios
-    .post('http://localhost:10000/linktree', {payload})
+    .post('http://localhost:10000/contact', {payload})
     .then((e) => {
       if (e.status != 200) {
         console.log(e);

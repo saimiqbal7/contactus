@@ -33,13 +33,23 @@ router.post('/contact', async (req, res) => {
   }
 
   // Use the code below to sign the data payload
-  let id = sha256(contact);
+
+  let id;
+  // Check if the contact is a string
+  if (typeof contact === 'string') {
+    id = sha256(contact);
+  } else {
+    // If not, convert it to a string and then hash it
+    id = sha256(JSON.stringify(contact));
+  }
 
   let proof = {
     id: id,
     contact: contact,
   };
   console.log('Check Proof:', proof);
+
+  const pubkey = contact.publicKey;
   // use fs to write the contact and proof to a file
   if (!fs.existsSync('./contact')) fs.mkdirSync('./contact');
   fs.writeFileSync(
@@ -70,12 +80,6 @@ router.get('/logs', async (req, res) => {
   res.status(200).send(logs);
 });
 
-// dumps all contacts (body data is encrypted so this endpoint does not require auth)
-router.get('/contact', async (req, res) => {
-  const log = 'Nothing to see here, check /:publicKey to get the contact';
-  // db.getAllContacts()
-  return res.status(200).send(log);
-});
 
 // returns a contact for a particular public key
 router.get('/contact/:publicKey', async (req, res) => {
@@ -93,7 +97,7 @@ router.get('/contact/list', async (req, res) => {
 });
 
 // accepts an upload of a new contact us submission
-router.get('/proofs/:contactId', async (req, res) => {
+router.get('/proofs/:publicKey', async (req, res) => {
   const { publicKey } = req.params;
   let proof = await db.getProofs(publicKey);
   proof = proof || '[]';
@@ -107,7 +111,7 @@ router.get('/proofs/', async (req, res) => {
 });
 
 // returns proofs for a particular round
-router.get('/proofs/:round', async (req, res) => {
+router.get('/nodeProofs/:round', async (req, res) => {
   const { round } = req.params;
   let nodeproof = (await db.getNodeProofCid(round)) || '[]';
   return res.status(200).send(nodeproof);
