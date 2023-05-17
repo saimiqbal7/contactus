@@ -2,21 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./styles.css";
-import ConnectWalletButton from './ConnectWalletButton.js';
 import { RecoilRoot } from 'recoil';
-const nacl = require('tweetnacl');
-const { Buffer } = require('buffer');
-
-function encryptWithPublicKey(publicKey, data) {
-  const publicKeyBytes = Buffer.from(publicKey, 'base64');
-  const nonce = nacl.randomBytes(nacl.box.nonceLength);
-  const encryptedBytes = nacl.box(Buffer.from(data), nonce, publicKeyBytes, nacl.box.keyPair().secretKey);
-  const encryptedMessage = Buffer.concat([nonce, encryptedBytes]);
-  const encryptedData = encryptedMessage.toString('base64');
-  return encryptedData;
-}
-
-const publicKey = 'V07LV6MOcZSexrZ/MaRyFM82z49/PGev64ncovdk7sg=';
 
 function App() {
   const {
@@ -26,7 +12,6 @@ function App() {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    encryptWithPublicKey(publicKey, data);
     sendData(data)
   }; // your form submit function which will invoke after successful validation
 
@@ -44,7 +29,6 @@ function App() {
   return (
     <RecoilRoot>
       <h1>Contact Us</h1>
-      <ConnectWalletButton />
       <form onSubmit={handleSubmit(onSubmit)}>
         <label>Email</label>
         <input {...register("email", { required: true })} />
