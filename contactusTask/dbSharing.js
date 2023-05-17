@@ -1,13 +1,11 @@
 const { app, MAIN_ACCOUNT_PUBKEY, SERVICE_URL, TASK_ID } = require("./init");
 const {default: axios} = require('axios');
-const  namespaceWrapper  = require('./namespaceWrapper');
 const db = require('./db_model');
 const nacl = require('tweetnacl');
 const bs58 = require('bs58');
 
 
 const share = async () => {
-  await namespaceWrapper.getDb();
       try {
         // find another node
         const nodesUrl = `${SERVICE_URL}/nodes/${TASK_ID}`;

@@ -9,7 +9,6 @@ const web3 = new Web3();
 const ethUtil = require('ethereumjs-util');
 
 module.exports = async (submission_value, round) => {
-  await namespaceWrapper.getDb();
   console.log('******/ contact CID VALIDATION Task FUNCTION /******');
   const outputraw = await dataFromCid(submission_value);
   const output = outputraw.data;

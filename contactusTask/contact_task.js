@@ -12,7 +12,6 @@ const db = require('./db_model');
 const { Keypair } = require('@solana/web3.js'); // TEST For local testing
 
 const main = async () => {
-  await namespaceWrapper.getDb();
   console.log('******/  IN contact Task FUNCTION /******');
 
   // Load node's keypair from the JSON file
