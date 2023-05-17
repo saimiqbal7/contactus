@@ -8,37 +8,29 @@ class NamespaceWrapper {
   #db;
 
   constructor() {
-    this.initDB();
-    // if(taskNodeAdministered){
-    //   this.getTaskLevelDBPath().then((path)=>{
-    //     this.#db = Datastore.create(path);
-    //   }).catch((err)=>{
-    //     console.error(err)
-    //     this.#db = Datastore.create(`../namespace/${TASK_ID}/KOIILevelDB.db`);
-    //   })
-    // }else{
-    //   this.#db = Datastore.create('./localKOIIDB.db');
-    //   console.log("DB Initialized")
-    // }
-    // this.ensureIndex();
+    if(taskNodeAdministered){
+      this.getTaskLevelDBPath().then((path)=>{
+        this.#db = Datastore.create(path);
+      }).catch((err)=>{
+        console.error(err)
+        this.#db = Datastore.create(`../namespace/${TASK_ID}/KOIILevelDB.db`);
+      })
+    }else{
+      this.#db = Datastore.create('./localKOIIDB.db');
+      console.log("DB Initialized")
+    }
   }
 
-  async initDB() {
+  async getDb(){
+
     if(this.#db)return this.#db
-    if(taskNodeAdministered){
     try{
       const path = await this.getTaskLevelDBPath()
       this.#db = Datastore.create(path);
     }catch(e){
       this.#db = Datastore.create(`../namespace/${TASK_ID}/KOIILevelDB.db`);
     }
-  }else{
-      this.#db = Datastore.create('./localKOIIDB.db');
-      console.log("DB Initialized")
-    }
-    this.ensureIndex();
     return this.#db
- 
   }
 
   ensureIndex() {

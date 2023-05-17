@@ -8,6 +8,7 @@ const db = require('./db_model');
 class CoreLogic {
   async task() {
     
+    await namespaceWrapper.getDb();
     // run contact task
     console.log('*********task() started*********');
 

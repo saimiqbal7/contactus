@@ -14,7 +14,8 @@ const routes = require('./routes');
 const path = require('path');
 
 async function setup() {
-  
+  await namespaceWrapper.getDb();
+
   const originalConsoleLog = console.log;
   const logDir = './namespace';
   const logFile = 'logs.txt';
