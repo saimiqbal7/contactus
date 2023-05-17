@@ -6,66 +6,36 @@ const BASE_ROOT_URL = `http://localhost:${TASK_NODE_PORT}/namespace-wrapper`;
 const Datastore = require('nedb-promises');
 class NamespaceWrapper {
   #db;
-
   constructor() {
-    if(taskNodeAdministered){
-      this.getTaskLevelDBPath().then((path)=>{
-        this.#db = Datastore.create(path);
-      }).catch((err)=>{
-        console.error(err)
-        this.#db = Datastore.create(`../namespace/${TASK_ID}/KOIILevelDB.db`);
-      })
-    }else{
+    if (taskNodeAdministered) {
+      this.initializeDB();
+    } else {
       this.#db = Datastore.create('./localKOIIDB.db');
-      console.log("DB Initialized")
     }
   }
 
-  async getDb(){
-
-    if(this.#db)return this.#db
-    try{
-      const path = await this.getTaskLevelDBPath()
+  async initializeDB() {
+    if (this.#db) return;
+    try {
+      const path = await this.getTaskLevelDBPath();
       this.#db = Datastore.create(path);
-    }catch(e){
+    } catch (e) {
       this.#db = Datastore.create(`../namespace/${TASK_ID}/KOIILevelDB.db`);
     }
-    return this.#db
   }
 
-  ensureIndex() {
-    this.#db.ensureIndex(
-      { fieldName: 'contactId', unique: true, sparse: true },
-      function (err) {
-        if (err) console.error('Index creation error:', err);
-      },
-    );
-    this.#db.ensureIndex(
-      { fieldName: 'proofsId', unique: true, sparse: true },
-      function (err) {
-        if (err) console.error('Index creation error:', err);
-      },
-    );
-    this.#db.ensureIndex(
-      { fieldName: 'NodeProofsCidId', unique: true, sparse: true },
-      function (err) {
-        if (err) console.error('Index creation error:', err);
-      },
-    );
-    this.#db.ensureIndex(
-      { fieldName: 'authListId', unique: true, sparse: true },
-      function (err) {
-        if (err) console.error('Index creation error:', err);
-      },
-    );
+  async getDb() {
+    if (this.#db) return this.#db;
+    await this.initializeDB();
+    return this.#db;
   }
-
   /**
    * Namespace wrapper of storeGetAsync
    * @param {string} key // Path to get
    */
   async storeGet(key) {
     try {
+      await this.initializeDB();
       const resp = await this.#db.findOne({ key: key });
       if (resp) {
         return resp[key];
@@ -84,13 +54,14 @@ class NamespaceWrapper {
    */
   async storeSet(key, value) {
     try {
-      console.log({ [key]: value, key });
+      await this.initializeDB();
       await this.#db.insert({ [key]: value, key });
     } catch (e) {
       console.error(e);
       return undefined;
     }
   }
+
   /**
    * Namespace wrapper over fsPromises methods
    * @param {*} method The fsPromise method to call
@@ -103,6 +74,7 @@ class NamespaceWrapper {
   async fsStaking(method, path, ...args) {
     return await genericHandler('fsStaking', method, path, ...args);
   }
+
   async fsWriteStream(imagepath) {
     return await genericHandler('fsWriteStream', imagepath);
   }
@@ -110,6 +82,9 @@ class NamespaceWrapper {
     return await genericHandler('fsReadStream', imagepath);
   }
 
+  /**
+   * Namespace wrapper for getting current slots
+   */
   async getSlot() {
     return await genericHandler('getCurrentSlot');
   }
@@ -118,10 +93,9 @@ class NamespaceWrapper {
     return await genericHandler('signData', body);
   }
 
-
   /**
    * Namespace wrapper of storeGetAsync
-   * @param {string} signedMessage // Path to get
+   * @param {string} signedMessage r // Path to get
    */
 
   async verifySignature(signedMessage, pubKey) {
@@ -301,7 +275,6 @@ class NamespaceWrapper {
   }
 
   async validateAndVoteOnNodes(validate, round) {
-
     console.log('******/  IN VOTING /******');
     const taskAccountDataJSON = await this.getTaskState();
 
