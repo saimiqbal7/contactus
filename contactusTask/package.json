@@ -21,6 +21,7 @@
     "@_koii/create-task-cli": "^0.1.21",
     "@solana/web3.js": "^1.74.0",
     "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "eth-crypto": "^2.6.0",
     "eth-sig-util": "^3.0.1",
     "ethereumjs-util": "^7.1.5",

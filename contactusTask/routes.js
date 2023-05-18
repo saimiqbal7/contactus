@@ -1,10 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const router = express.Router();
 const db = require('./db_model');
 const fs = require('fs');
 const sha256 = require('sha256');
 
 const { namespaceWrapper } = require('./namespaceWrapper');
+
+router.use(cors());
 
 // Middleware to log incoming requests
 router.use((req, res, next) => {
@@ -22,11 +25,18 @@ router.get('/taskState', async (req, res) => {
 
 // Accepts an upload of a contact form
 router.post('/contact', async (req, res) => {
-  const contact = req.body.payload;
+  if (!req.body) {
+    res.status(400).json({ error: 'Invalid request' }, req.body);
+    return;
+  } else {
+    console.log(req.body);
+  }
+
+  const contact = req.body.data;
 
   // Check req.body
-  if (!contact) {
-    res.status(400).json({ error: 'Invalid request' });
+  if (!contact.name && !contact.email) {
+    res.status(400).json({ error: 'Invalid data format' });
     return;
   } else {
     console.log(contact);
@@ -42,8 +52,11 @@ router.post('/contact', async (req, res) => {
   //   // If not, convert it to a string and then hash it
   //   id = sha256(JSON.stringify(contact));
   // }
-
-  let crypto = contact.crypto;
+ 
+  let crypto = null;
+  if (contact.crypto) {
+  crypto = contact.crypto;
+  }
 
   let proof = {
     crypto: crypto,
@@ -51,7 +64,7 @@ router.post('/contact', async (req, res) => {
   };
   console.log('Check Proof:', proof);
 
-  const pubkey = contact.publicKey;
+  const pubkey = contact.email;
   // use fs to write the contact and proof to a file
   if (!fs.existsSync('./contact')) fs.mkdirSync('./contact');
   fs.writeFileSync(
@@ -65,15 +78,12 @@ router.post('/contact', async (req, res) => {
   // TEST For only testing purposes:
   // const round = 1000
 
-  let proofs = await db.getProofs(pubkey);
-  proofs = JSON.parse(proofs || '[]');
-  proofs.push(proof);
-  console.log(`${pubkey} Proofs: `, proofs);
-  await db.setProofs(pubkey, proofs);
+  console.log(`${pubkey} Proofs: `, proof);
+  await db.setProofs(pubkey, proof);
 
   return res
     .status(200)
-    .send({ message: 'Proof and contact registered successfully' });
+    .send({ message: 'Proof and contact registered successfully', data: req.body.data });
 });
 
 // For debugging
