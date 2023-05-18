@@ -33,11 +33,11 @@ function App() {
         <label>Email</label>
         <input {...register("email", { required: true })} />
         {errors.email && <p>This field is required</p>}
-        <label>Name</label>
+        {/* <label>Name</label>
         <input {...register("name", { required: true })} />
         {errors.name && <p>This field is required</p>}
         <label>Comment</label>
-        <textarea style={{width: '100%', 'min-height': '8em', boxSizing: 'border-box', resize: 'none' }} {...register("textArea")} ></textarea>
+        <textarea style={{width: '100%', 'min-height': '8em', boxSizing: 'border-box', resize: 'none' }} {...register("textArea")} ></textarea> */}
         <input type="submit" />
       </form>
     </RecoilRoot>
