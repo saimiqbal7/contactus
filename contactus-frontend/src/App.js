@@ -3,19 +3,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./styles.css";
 import { RecoilRoot } from 'recoil';
-import crypto from 'crypto-browserify';
+import { AES, enc } from 'crypto-js';
 
 const encrypt = (message, publicKey) => {
-  const buffer = Buffer.from(message, 'utf8');
-  const encrypted = crypto.publicEncrypt(publicKey, buffer);
-  return encrypted.toString('base64');
-}
-
-// Decrypt a message with a private key
-const decrypt = (encrypted, privateKey) => {
-    const buffer = Buffer.from(encrypted, 'base64');
-    const decrypted = crypto.privateDecrypt(privateKey, buffer);
-    return decrypted.toString('utf8');
+  const eData = AES.encrypt(message, publicKey);
 }
 
 function App() {
@@ -34,15 +25,13 @@ function App() {
   }
  
 
-
   const sendData = async (data) => {
     try {
       console.log(data);
 
+      console.log("ENCRYPT"); 
       let edata = encrypt(data, wallet.publicKey);
       console.log(edata);
-
-      console.log(decrypt(edata));
 
       const response = await axios.post('http://192.168.2.41:10000/contact', {
         data, 
