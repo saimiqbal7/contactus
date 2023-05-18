@@ -32,19 +32,21 @@ router.post('/contact', async (req, res) => {
     console.log(contact);
   }
 
-  // Use the code below to sign the data payload
+  // // Use the code below to sign the data payload
 
-  let id;
-  // Check if the contact is a string
-  if (typeof contact === 'string') {
-    id = sha256(contact);
-  } else {
-    // If not, convert it to a string and then hash it
-    id = sha256(JSON.stringify(contact));
-  }
+  // let id;
+  // // Check if the contact is a string
+  // if (typeof contact === 'string') {
+  //   id = sha256(contact);
+  // } else {
+  //   // If not, convert it to a string and then hash it
+  //   id = sha256(JSON.stringify(contact));
+  // }
+
+  let crypto = contact.crypto;
 
   let proof = {
-    id: id,
+    crypto: crypto,
     contact: contact,
   };
   console.log('Check Proof:', proof);
