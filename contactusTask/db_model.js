@@ -88,7 +88,7 @@ const getNodeProofCid = async round => {
   try {
     const resp = await db.findOne({ NodeProofsCidId });
     if (resp) {
-      return resp.proofs;
+      return resp.cid;
     } else {
       return null;
     }
