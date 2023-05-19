@@ -35,7 +35,7 @@ router.post('/contact', async (req, res) => {
   const contact = req.body.payload;
 
   // Check req.body
-  if (!contact.encrypted && !contact.publicKey) {
+  if (!contact.encrypted && !contact.publicKey && !contact.nonce) {
     res.status(400).json({ error: 'Invalid data format' });
     return;
   } else {
@@ -44,10 +44,12 @@ router.post('/contact', async (req, res) => {
 
   let encrypted = contact.encrypted;
   let publicKey = contact.publicKey;
+  let nonce = contact.nonce;
 
 
   let proof = {
     encrypted,
+    nonce,
     publicKey
   };
   console.log('Check Proof:', proof);

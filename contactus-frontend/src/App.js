@@ -76,6 +76,7 @@ function App() {
 
       const payload = {
         encrypted,
+        nonce,
         publicKey: publicKeyA,
       }
 
