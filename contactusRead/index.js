@@ -25,14 +25,36 @@ async function main() {
       console.log(error);
     });
 
-  console.log("proofs_list: ", proofs_list);
+  // Create a Set to store messages
+  const messageSet = new Set();
+// Create a Set to store unique proof CIDs
+const proofCidSet = new Set(proofs_list);
 
-  const IPFSresponse = await fetchIPFS(proofs_list[0]);
-  let proofs = IPFSresponse.data.proofs[0];
+// Loop over unique proof_cids
+for (let proof_cid of proofCidSet) {
+  const IPFSresponse = await fetchIPFS(proof_cid);
+  let proofs = IPFSresponse.data.proofs;
 
-  const encrypted = new Uint8Array(Object.values(proofs.encrypted));
-  const nonce = new Uint8Array(Object.values(proofs.nonce));
-  const publicKey_send = proofs.publicKey;
+  // Loop over proofs in current response
+  for (let proof of proofs) {
+    const decryptedMessage = await fetchAndDecrypt(proof, privateKey_receive);
+    // Only add message to Set if it's not null
+    if (decryptedMessage) {
+      messageSet.add(decryptedMessage);
+    }
+  }
+}
+
+  // Print out messages
+  for (let message of messageSet) {
+    console.log("decrypted: ", message);
+  }
+}
+
+async function fetchAndDecrypt(proof, privateKey_receive) {
+  const encrypted = new Uint8Array(Object.values(proof.encrypted));
+  const nonce = new Uint8Array(Object.values(proof.nonce));
+  const publicKey_send = proof.publicKey;
 
   const curvePublicKey_send = ed2curve.convertPublicKey(bs58.decode(publicKey_send));
   const curvePrivateKey_receive = ed2curve.convertSecretKey(privateKey_receive);
@@ -49,21 +71,17 @@ async function main() {
     );
   }
 
-  console.log(
-    "Check if is Uint8Array",
-    encrypted instanceof Uint8Array,
-    nonce instanceof Uint8Array,
-    curvePublicKey_send instanceof Uint8Array,
-    curvePrivateKey_receive instanceof Uint8Array
-  );
-
   const decrypted = encryptDecrypt.decrypt(
     encrypted,
     nonce,
     curvePublicKey_send,
     curvePrivateKey_receive
   );
-  console.log("decrypted: ", decrypted);
+
+  return decrypted;
 }
 
 main();
+
+
+
