@@ -32,58 +32,45 @@ router.post('/contact', async (req, res) => {
     console.log(req.body);
   }
 
-  const contact = req.body.data;
+  const contact = req.body.payload;
 
   // Check req.body
-  if (!contact.name && !contact.email) {
+  if (!contact.encrypted && !contact.publicKey) {
     res.status(400).json({ error: 'Invalid data format' });
     return;
   } else {
     console.log(contact);
   }
 
-  // // Use the code below to sign the data payload
+  let encrypted = contact.encrypted;
+  let publicKey = contact.publicKey;
 
-  // let id;
-  // // Check if the contact is a string
-  // if (typeof contact === 'string') {
-  //   id = sha256(contact);
-  // } else {
-  //   // If not, convert it to a string and then hash it
-  //   id = sha256(JSON.stringify(contact));
-  // }
- 
-  let crypto = null;
-  if (contact.crypto) {
-  crypto = contact.crypto;
-  }
 
   let proof = {
-    crypto: crypto,
-    contact: contact,
+    encrypted,
+    publicKey
   };
   console.log('Check Proof:', proof);
 
-  const pubkey = contact.email;
   // use fs to write the contact and proof to a file
   if (!fs.existsSync('./contact')) fs.mkdirSync('./contact');
   fs.writeFileSync(
-    './contact/' + `contact_${pubkey}.json`,
+    './contact/' + `contact_${publicKey}.json`,
     JSON.stringify(contact),
   );
   // fs.writeFileSync('proof.json', JSON.stringify(proof));
-  await db.setContact(pubkey, contact);
+  await db.setContact(publicKey, encrypted);
 
   const round = await namespaceWrapper.getRound();
   // TEST For only testing purposes:
   // const round = 1000
 
-  console.log(`${pubkey} Proofs: `, proof);
-  await db.setProofs(pubkey, proof);
+  console.log(`${publicKey} Proofs: `, proof);
+  await db.setProofs(publicKey, proof);
 
   return res
     .status(200)
-    .send({ message: 'Proof and contact registered successfully', data: req.body.data });
+    .send({ message: 'Proof and contact registered successfully', data: req.body.payload });
 });
 
 // For debugging
@@ -103,8 +90,8 @@ router.get('/contact/:publicKey', async (req, res) => {
 
 // returns list of all contacts
 router.get('/contact/list', async (req, res) => {
-  let contactList = await db.getAllContacts();
-  contactList = contactList || '[]';
+  let contactList = (await db.getAllContacts()) || '[]';
+  console.log(contactList)
   return res.status(200).send(contactList);
 });
 
@@ -116,8 +103,14 @@ router.get('/proofs/:publicKey', async (req, res) => {
   return res.status(200).send(proof);
 });
 
+// return list of all proofs
+router.get('/proofs/list', async (req, res) => {
+  let proofsList = (await db.getAllProofs());
+  return res.status(200).send(proofsList);
+});
+
 // returns 'proofs' aka encrypted contact us submissions to verify receipt of submissions
-router.get('/proofs/', async (req, res) => {
+router.get('/nodeproofs/list', async (req, res) => {
   contactNodeProofs = (await db.getAllNodeProofCids()) || '[]';
   return res.status(200).send(contactNodeProofs);
 });

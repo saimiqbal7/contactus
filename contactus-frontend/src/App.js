@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./styles.css";
@@ -73,13 +73,16 @@ function App() {
       );
       setDecryptedMessage(decrypted);
 
-      // let edata = encrypt(JSON.stringify(data), wallet.publicKey);
-      // console.log(edata);
 
-      // console.log(decrypt(edata));
+      const payload = {
+        encrypted,
+        publicKey: publicKeyA,
+      }
+
+      console.log("payload to send ", payload)
 
       const response = await axios.post("http://192.168.2.41:10000/contact", {
-        encrypted,
+        payload,
       });
 
       console.log(response);

@@ -28,7 +28,7 @@ const setContact = async (publicKey, contact) => {
     await db.insert({ contactId, contact });
     return console.log('contact set');
   } catch (err) {
-    console.error("Error insert data: ", err.key, err.errorType);
+    console.error('Error insert data: ', err.key, err.errorType);
     return undefined;
   }
 };
@@ -43,7 +43,7 @@ const getAllContacts = async () => {
 };
 
 // namespaceWrapper.levelDB functions for proofs
-const getProofs = async (pubkey) => {
+const getProofs = async pubkey => {
   const db = await namespaceWrapper.getDb();
   const proofsId = getProofsId(pubkey);
   try {
@@ -75,12 +75,14 @@ const getAllProofs = async () => {
   const proofsListRaw = await db.find({
     proofs: { $exists: true },
   });
+  console.log('Proofs List Raw', proofsListRaw);
   let proofsList = proofsListRaw.map(proofsList => proofsList.proofs);
+  console.log('Proofs List', proofsList);
   return proofsList;
 };
 
 // db functions for node proofs
-const getNodeProofCid = async (round) => {
+const getNodeProofCid = async round => {
   const db = await namespaceWrapper.getDb();
   const NodeProofsCidId = getNodeProofCidid(round);
   try {
@@ -119,7 +121,7 @@ const getAllNodeProofCids = async () => {
 };
 
 //db functions fro Auth list
-const getAuthList = async (pubkey) => {
+const getAuthList = async pubkey => {
   const db = await namespaceWrapper.getDb();
   const authListId = getauthListid(pubkey);
   try {
@@ -133,7 +135,7 @@ const getAuthList = async (pubkey) => {
   }
 };
 
-const setAuthList = async (pubkey) => {
+const setAuthList = async pubkey => {
   const db = await namespaceWrapper.getDb();
   try {
     const authListId = getauthListid(pubkey);
@@ -144,7 +146,7 @@ const setAuthList = async (pubkey) => {
   }
 };
 
-const getAllAuthLists = async (values) => {
+const getAllAuthLists = async values => {
   const db = await namespaceWrapper.getDb();
   const authListRaw = await db.find({
     authList: { $exists: true },
