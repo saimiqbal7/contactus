@@ -13,18 +13,56 @@ There are a lot of moving pieces in this application so we will break it into st
 
 ```javascript
 const solanaWeb3 = require('@solana/web3.js');
-   const keyPair1 = solanaWeb3.Keypair.generate();
+const keyPair1 = solanaWeb3.Keypair.generate();
 ```
 
-   you can also check `contactusTask/test/test_wallet_generate.js` file, it will generate two new Solana keypairs and print out the public and private keys.
+you can also check `contactusTask/test/test_wallet_generate.js` file, it will generate two new Solana keypairs and save them to `keys.json` file.
 
 - Save it and pass into .env files for the next few steps
 
 ## Set up the p2p database on a Koii node
 
+It is using Koii Task to set up the backend p2p database. Check the contactusTask folder for the task code. It provide REST endpoints and database modle to interact with the task node. Learn more about the Koii Task [here](https://docs.koii.network/develop/koii-task-101/what-are-tasks/).
+
+### Set up the database and REST API
+
+Check `db_model.js` file to customize the database model. It is using nedb as the database. *note: please use nedb to successfully connect with Koii Node*. 
+
+Check `routes.js` file to customize the REST API. It is using express as the framework.
+
+Then you can create your Koii task and deploy it to the Koii node. Learn more about how to create and deploy a task [here](https://docs.koii.network/quickstart/command-line-tool/create-task-cli).
+
 ## Set up the front-end in react
 
+The front end is responsible for letting the user enter some data, encrypting it to the public address and host it on one of the task nodes running that task. To achieve this we need the following:
+
+- Task creator public address to encrypt data
+- Task nodes ip address to post the data to it
+
+### Install dependencies
+
+```bash
+npm install
+or
+yarn install
+```
+
+### Configure the .env file
+
+Set up the .env file with the following variables:
+
+```bash
+REACT_APP_TASK_CREATOR_PUBLIC_KEY=<task creator public key>
+REACT_APP_TASK_CREATOR_PRIVATE_KEY=<task creator private key>
+REACT_APP_TASK_SENDER_PUBLIC_KEY=<task sender public key>
+REACT_APP_TASK_SENDER_PRIVATE_KEY=<task sender public key>
+REACT_APP_TASK_NODE_IP=<task node ip address>
+```
+
+
 ### Fill out the form
+
+Run `yarn start` to start the App. Fill out the form and submit it. The data will be encrypted and sent to the task node.
 
 ## Fetch and decrypt form fill using local keypair
 
