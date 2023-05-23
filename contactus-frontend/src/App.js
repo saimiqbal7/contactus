@@ -3,9 +3,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./styles.css";
 import { RecoilRoot } from "recoil";
-import * as ed2curve from "ed2curve";
-import * as bs58 from "bs58";
 import { encrypt, decrypt, nonce } from "solana-encryption";
+// import { encrypt, decrypt, nonce } from "./encryptDecrypt";
 
 function App() {
   const [encryptedMessage, setEncryptedMessage] = useState("");
@@ -27,23 +26,15 @@ function App() {
       // console.log(data);
 
       const publicKeyA = process.env.REACT_APP_TASK_SENDER_PUBLIC_KEY;
+
       const privateKeyAString = process.env.REACT_APP_TASK_SENDER_PRIVATE_KEY;
       const privateKeyA = new Uint8Array(privateKeyAString.split(',').map(Number));
+
       const publicKeyB = process.env.REACT_APP_TASK_CREATOR_PUBLIC_KEY;
+
       const privateKeyBString = process.env.REACT_APP_TASK_CREATOR_PRIVATE_KEY;
       const privateKeyB = new Uint8Array(privateKeyBString.split(',').map(Number));
 
-      const curve25519PublicKeyA = ed2curve.convertPublicKey(
-        bs58.decode(publicKeyA)
-      );
-
-      const curve25519PrivateKeyA = ed2curve.convertSecretKey(privateKeyA);
-      const curve25519PublicKeyB = ed2curve.convertPublicKey(
-        bs58.decode(publicKeyB)
-      );
-      const curve25519PrivateKeyB = ed2curve.convertSecretKey(privateKeyB);
-
-      // const nonce = nacl.randomBytes(nacl.box.nonceLength);
       const newNonce = nonce();
 
       const message = JSON.stringify(data);
@@ -51,16 +42,16 @@ function App() {
       const encrypted = encrypt(
         message,
         newNonce,
-        curve25519PublicKeyB,
-        curve25519PrivateKeyA
+        publicKeyB,
+        privateKeyA
       );
       setEncryptedMessage(encrypted);
 
       const decrypted = decrypt(
         encrypted,
         newNonce,
-        curve25519PublicKeyA,
-        curve25519PrivateKeyB
+        publicKeyA,
+        privateKeyB
       );
       setDecryptedMessage(decrypted);
 

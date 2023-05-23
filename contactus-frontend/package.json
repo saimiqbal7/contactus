@@ -18,7 +18,7 @@
     "react-hook-form": "^7.43.9",
     "react-scripts": "5.0.1",
     "recoil": "^0.7.7",
-    "solana-encryption": "^1.0.3",
+    "solana-encryption": "^1.0.5",
     "stream-browserify": "^3.0.0",
     "tweetnacl": "^1.0.3",
     "web-vitals": "^2.1.4"
