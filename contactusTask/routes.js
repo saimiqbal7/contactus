@@ -55,11 +55,11 @@ router.post('/contact', async (req, res) => {
   console.log('Check Proof:', proof);
 
   // use fs to write the contact and proof to a file
-  if (!fs.existsSync('./contact')) fs.mkdirSync('./contact');
-  fs.writeFileSync(
-    './contact/' + `contact_${publicKey}.json`,
-    JSON.stringify(contact),
-  );
+  // if (!fs.existsSync('./contact')) fs.mkdirSync('./contact');
+  // fs.writeFileSync(
+  //   './contact/' + `contact_${publicKey}.json`,
+  //   JSON.stringify(contact),
+  // );
   // fs.writeFileSync('proof.json', JSON.stringify(proof));
   await db.setContact(publicKey, encrypted);
 
