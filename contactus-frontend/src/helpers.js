@@ -17,7 +17,7 @@ export const fetchData = async (nodeURL, taskID) => {
   try {
     const response = await axios.get(`${nodeURL}/task/${taskID}/nodeProofs/list`);
     if (response.data && response.data.data) {
-      console.log(`Data found in node ${i}:`, response.data.data);
+      console.log(`Data found in node:`, response.data.data);
       const userData = response.data.data.linktree;
       return userData;
     }

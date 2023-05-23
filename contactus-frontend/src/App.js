@@ -3,11 +3,9 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./styles.css";
 import { RecoilRoot } from "recoil";
-import * as nacl from "tweetnacl";
 import * as ed2curve from "ed2curve";
-import { encrypt, decrypt } from "./encryptDecrypt";
 import * as bs58 from "bs58";
-import { getNodeList } from "./helpers";
+import { encrypt, decrypt, nonce } from "solana-encryption";
 
 function App() {
   const [encryptedMessage, setEncryptedMessage] = useState("");
@@ -28,27 +26,31 @@ function App() {
     try {
       // console.log(data);
 
-      const publicKeyA = process.env.TASK_SENDER_PUBLIC_KEY;
-      const privateKeyA = new Uint8Array(process.env.TASK_SENDER_PRIVATE_KEY);
-      const publicKeyB = process.env.TASK_CREATOR_PUBLIC_KEY;
-      const privateKeyB = new Uint8Array(process.env.TASK_CREATOR_PRIVATE_KEY);
+      const publicKeyA = process.env.REACT_APP_TASK_SENDER_PUBLIC_KEY;
+      const privateKeyAString = process.env.REACT_APP_TASK_SENDER_PRIVATE_KEY;
+      const privateKeyA = new Uint8Array(privateKeyAString.split(',').map(Number));
+      const publicKeyB = process.env.REACT_APP_TASK_CREATOR_PUBLIC_KEY;
+      const privateKeyBString = process.env.REACT_APP_TASK_CREATOR_PRIVATE_KEY;
+      const privateKeyB = new Uint8Array(privateKeyBString.split(',').map(Number));
 
       const curve25519PublicKeyA = ed2curve.convertPublicKey(
         bs58.decode(publicKeyA)
       );
+
       const curve25519PrivateKeyA = ed2curve.convertSecretKey(privateKeyA);
       const curve25519PublicKeyB = ed2curve.convertPublicKey(
         bs58.decode(publicKeyB)
       );
       const curve25519PrivateKeyB = ed2curve.convertSecretKey(privateKeyB);
 
-      const nonce = nacl.randomBytes(nacl.box.nonceLength);
+      // const nonce = nacl.randomBytes(nacl.box.nonceLength);
+      const newNonce = nonce();
 
       const message = JSON.stringify(data);
 
       const encrypted = encrypt(
         message,
-        nonce,
+        newNonce,
         curve25519PublicKeyB,
         curve25519PrivateKeyA
       );
@@ -56,7 +58,7 @@ function App() {
 
       const decrypted = decrypt(
         encrypted,
-        nonce,
+        newNonce,
         curve25519PublicKeyA,
         curve25519PrivateKeyB
       );
@@ -65,15 +67,13 @@ function App() {
 
       const payload = {
         encrypted,
-        nonce,
+        newNonce,
         publicKey: publicKeyA,
       }
 
       console.log("payload to send ", payload)
 
-      // const nodeList = await getNodeList(process.env.TASK_ID);
-
-      const response = await axios.post(process.env.TASK_NODE_IP, {
+      const response = await axios.post("http://192.168.2.41:10000/contact", {
         payload,
       });
 
@@ -86,8 +86,8 @@ function App() {
   return (
     <RecoilRoot>
       <h1>Contact Us</h1>
-      <div style={{ "text-align": "center", color: "white" }}>
-        <div style={{'text-align': '-webkit-center'}}>
+      <div style={{ "textAlign": "center", color: "white" }}>
+        <div style={{'textAlign': '-webkit-center'}}>
           <h2>Encrypted message:</h2>
           <h2 style={{ maxWidth: "800px", wordWrap: "break-word" }}>{encryptedMessage}</h2>
           <h2>Decrypted message:</h2>
