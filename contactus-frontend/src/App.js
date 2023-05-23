@@ -58,7 +58,7 @@ function App() {
 
       const payload = {
         encrypted,
-        newNonce,
+        nonce: newNonce,
         publicKey: publicKeyA,
       }
 
