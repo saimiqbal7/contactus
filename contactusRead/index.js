@@ -1,4 +1,5 @@
 const encryptDecrypt = require("./encryptDecrypt");
+const { getNodeList } = './helpers';
 const ed2curve = require("ed2curve");
 const axios = require("axios");
 const fetchIPFS = require("./dataFromCid");
@@ -6,12 +7,9 @@ const bs58 = require("bs58");
 
 async function main() {
   // Convert Solana Keypair to format compatible with ed2curve and TweetNaCl
-  const privateKey_receive = new Uint8Array([
-    178, 119, 119, 186, 189, 96, 234, 41, 118, 99, 34, 21, 5, 236, 129, 96, 236,
-    182, 201, 0, 240, 23, 63, 251, 17, 210, 203, 123, 112, 141, 96, 231, 181,
-    170, 12, 97, 4, 250, 99, 214, 92, 206, 137, 92, 57, 220, 203, 160, 122, 135,
-    126, 89, 168, 120, 211, 143, 116, 178, 56, 63, 251, 185, 61, 48,
-  ]);
+  const privateKey_receive = new Uint8Array(process.env.TASK_RECEIVER_PRIVATE_KEY);
+
+  // const nodeList = await getNodeList(process.env.TASK_ID);
 
   let proofs_list = await axios
     .get("http://localhost:10000/nodeproofs/list")

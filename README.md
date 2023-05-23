@@ -64,38 +64,33 @@ REACT_APP_TASK_NODE_IP=<task node ip address>
 
 Run `yarn start` to start the App. Fill out the form and submit it. The data will be encrypted and sent to the task node.
 
-## Fetch and decrypt form fill using local keypair
-
-# The front end 
-The front end is responsible for letting the user enter some data. 
-
 ## Encrypting form data
-After the data is entered, it is encrypted to the public address and host it on one of the task nodes running that task. To achieve this we need the following:
-	
-Task creator public address to encrypt data
-Task nodes ip address to post the data to it
+
+After the data is entered, it is encrypted to the public address and host it on one of the task nodes running that task. It use package `solana-encryption` to encrypt the data. In the back end when you fetch the data, you can use the same package to decrypt the data. Check `App.js` file `line:15` for more details.
 
 ## Submitting to the p2p database
 
 ### Find a koii node
 
-### POST e2ee data to the Koii nodes
-i.e. for the user / clientside
+It provide `helper.js` file that can help you find a koii node that is running the task. It will return the ip address of the node. You can use it to post the data to the node.
 
+### POST e2ee data to the Koii nodes
+For the user / clientside. User will submit the encrypted data to the task node. The task node will store the data in the database and upload the data to the IPFS. It will return the cid of the data on the IPFS. The user can use the cid to retrieve the data from the task node.
 
 ### GET e2ee data from the Koii nodes
-i.e. for website owner
+For website owner, they can get the runnning node list and call their REST API to get the data. The data will be the cid of the data on the IPFS. The encrypted data will be stored in these cid and the task creator will be able to retrieve it using the cid. Creator can use the private key to decrypt the data and read the feedback.
 
 # The p2p database
-The task nodes running the contact-us task are responsible for  holding the encrypted payload.
+The task nodes running the contact-us task are responsible for holding the encrypted payload by using the `nedb`.
 
 ## What are task nodes
-< one line description and a link to the koii docs > 
+
+Head to docs to know more about [task nodes](https://docs.koii.network/run-a-node/introduction/task-nodes).
 
 ## The Contact-Us Task
-Contact-us task provide REST endpoints to interact with the task node:
+Contact-us task provide REST endpoints to interact with the task node, for example:
 
-- POST /contact/
+- POST /contact
     This endpoint will receive the encrypted payload and store it in the task node database. Then the data will also uploaded to the IPFS and store the return cid.
 
 - GET /proofs
@@ -103,10 +98,16 @@ Contact-us task provide REST endpoints to interact with the task node:
 
 ## Testing Locally
 
+After the task completed, you can use the docker to test it locally. Check the guide [here](https://docs.koii.network/develop/write-a-koii-task/task-development-kit-tdk/testing-locally-with-docker/) to use the docker. 
+
 ## Deploying the Task
 
+You can use create-task-cli to deploy the task. Check the guide [here](https://docs.koii.network/quickstart/command-line-tool/create-task-cli) to deploy the task. After the task is deployed, you need to whitelist your task so that it can be run on the Koii node. Please contact our support team to whitelist your task [here](https://discord.gg/koii).
 
 # Retrieving and decrypting the form-fill data
-.... once you have a working koii node running the task, and you're already running the react repo, you can fetch the form data and decrypt it ... < instructions >
+Once you have a working koii node running the task, and you're already running the react repo, you can fetch the form data and decrypt it using the following steps:
+
+- Check contactusRead folder.
+- Go through the README in that folder, it provide steps to setup the function.
 
 The back end will retrieve the encrypted data from the task node, decrypt is using the private key of the task creator and viewing the data

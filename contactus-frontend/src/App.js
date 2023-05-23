@@ -7,6 +7,7 @@ import * as nacl from "tweetnacl";
 import * as ed2curve from "ed2curve";
 import { encrypt, decrypt } from "./encryptDecrypt";
 import * as bs58 from "bs58";
+import { getNodeList } from "./helpers";
 
 function App() {
   const [encryptedMessage, setEncryptedMessage] = useState("");
@@ -70,7 +71,9 @@ function App() {
 
       console.log("payload to send ", payload)
 
-      const response = await axios.post("http://192.168.2.41:10000/contact", {
+      // const nodeList = await getNodeList(process.env.TASK_ID);
+
+      const response = await axios.post(process.env.TASK_NODE_IP, {
         payload,
       });
 
