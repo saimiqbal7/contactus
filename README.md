@@ -1,3 +1,13 @@
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/koii-network/koii.X/main/.github/images/koii_logo.svg" width="224px"/><br/>
+  Contact Us Task
+</h1>
+<p align="center">
+  <img src="https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=javascript&logoColor=white" alt="javascript" />&nbsp;
+   <a href="https://discord.gg/koii" target="_blank"><img src="https://img.shields.io/badge/Discord-7289DA?style=flat&logo=discord&logoColor=white" alt="cli version" /></a>&nbsp;
+   <a href="http://koii.network/" target="_blank"> <img src="https://img.shields.io/badge/made%20by-koii-blue" alt="made-by-koii" /></a>&nbsp;
+</p>
+
 # Contact Us Project
 
 There are a lot of moving pieces in this application so we will break it into steps:
