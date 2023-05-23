@@ -1,4 +1,4 @@
-const encryptDecrypt = require("./encryptDecrypt");
+const {encrypt, decrypt, nonce} = require('solana-encryption');
 const { getNodeList } = './helpers';
 const ed2curve = require("ed2curve");
 const axios = require("axios");
@@ -7,7 +7,8 @@ const bs58 = require("bs58");
 
 async function main() {
   // Convert Solana Keypair to format compatible with ed2curve and TweetNaCl
-  const privateKey_receive = new Uint8Array(process.env.TASK_RECEIVER_PRIVATE_KEY);
+  const privateKey_receiveString = process.env.TASK_RECEIVER_PRIVATE_KEY;
+  const privateKey_receive = new Uint8Array(privateKey_receiveString.split(',').map(Number));
 
   // const nodeList = await getNodeList(process.env.TASK_ID);
 
@@ -54,28 +55,11 @@ async function fetchAndDecrypt(proof, privateKey_receive) {
   const nonce = new Uint8Array(Object.values(proof.nonce));
   const publicKey_send = proof.publicKey;
 
-  const curvePublicKey_send = ed2curve.convertPublicKey(
-    bs58.decode(publicKey_send)
-  );
-  const curvePrivateKey_receive = ed2curve.convertSecretKey(privateKey_receive);
-
-  if (!curvePublicKey_send) {
-    throw new Error(
-      "Failed to convert publicKey_send. Is it a valid Ed25519 key?"
-    );
-  }
-
-  if (!curvePrivateKey_receive) {
-    throw new Error(
-      "Failed to convert privateKey_receive. Is it a valid Ed25519 key?"
-    );
-  }
-
   const decrypted = encryptDecrypt.decrypt(
     encrypted,
     nonce,
-    curvePublicKey_send,
-    curvePrivateKey_receive
+    publicKey_send,
+    privateKey_receive
   );
 
   return decrypted;

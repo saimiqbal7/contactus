@@ -1445,6 +1445,11 @@ semver@^7.3.4:
   dependencies:
     lru-cache "^6.0.0"
 
+solana-encryption@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/solana-encryption/-/solana-encryption-1.0.5.tgz#97ab63ec01c432c89cb5aea4ff911ad9854ccac4"
+  integrity sha512-/TYLQD6AjTJ0Q9YoklB7163lRHc+NSAPuKtQAvTBjNNVFkm/1TNnl5ijq3XxRAG/ht2d+V5dclj66bIRkesKMw==
+
 sparse-array@^1.3.1:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/sparse-array/-/sparse-array-1.3.2.tgz#0e1a8b71706d356bc916fe754ff496d450ec20b0"
