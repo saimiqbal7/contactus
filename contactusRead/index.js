@@ -1,13 +1,13 @@
-const {encrypt, decrypt, nonce} = require('solana-encryption');
+const {decrypt} = require('solana-encryption');
 const { getNodeList } = './helpers';
-const ed2curve = require("ed2curve");
 const axios = require("axios");
 const fetchIPFS = require("./dataFromCid");
-const bs58 = require("bs58");
+require('dotenv').config();
+
 
 async function main() {
   // Convert Solana Keypair to format compatible with ed2curve and TweetNaCl
-  const privateKey_receiveString = process.env.TASK_RECEIVER_PRIVATE_KEY;
+  const privateKey_receiveString = process.env.TASK_CREATOR_PRIVATE_KEY;
   const privateKey_receive = new Uint8Array(privateKey_receiveString.split(',').map(Number));
 
   // const nodeList = await getNodeList(process.env.TASK_ID);
@@ -55,7 +55,7 @@ async function fetchAndDecrypt(proof, privateKey_receive) {
   const nonce = new Uint8Array(Object.values(proof.nonce));
   const publicKey_send = proof.publicKey;
 
-  const decrypted = encryptDecrypt.decrypt(
+  const decrypted = decrypt(
     encrypted,
     nonce,
     publicKey_send,
