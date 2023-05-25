@@ -4,7 +4,7 @@ import axios from "axios";
 import "./styles.css";
 import { RecoilRoot } from "recoil";
 import { encrypt, decrypt, nonce } from "solana-encryption";
-// import { encrypt, decrypt, nonce } from "./encryptDecrypt";
+import { Keypair } from "@solana/web3.js"; 
 
 function App() {
 
@@ -27,15 +27,16 @@ function App() {
     try {
       // console.log(data);
 
-      const publicKeyA = process.env.REACT_APP_TASK_SENDER_PUBLIC_KEY;
+      const keypairA = Keypair.generate();
+      const keypairB = Keypair.generate();
 
-      const privateKeyAString = process.env.REACT_APP_TASK_SENDER_PRIVATE_KEY;
-      const privateKeyA = new Uint8Array(privateKeyAString.split(',').map(Number));
+      const publicKeyA = keypairA.publicKey.toBase58()  ;
+      const privateKeyA = keypairA.secretKey;
 
-      const publicKeyB = process.env.REACT_APP_TASK_CREATOR_PUBLIC_KEY;
+      const publicKeyB = keypairB.publicKey.toBase58();
+      const privateKeyB = keypairB.secretKey;
 
-      const privateKeyBString = process.env.REACT_APP_TASK_CREATOR_PRIVATE_KEY;
-      const privateKeyB = new Uint8Array(privateKeyBString.split(',').map(Number));
+   
 
       const newNonce = nonce();
 
