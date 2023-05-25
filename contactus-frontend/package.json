@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@solana/web3.js": "^1.77.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -18,6 +19,7 @@
     "react-hook-form": "^7.43.9",
     "react-scripts": "5.0.1",
     "recoil": "^0.7.7",
+    "solana": "^1.0.7-development",
     "solana-encryption": "^1.0.5",
     "stream-browserify": "^3.0.0",
     "tweetnacl": "^1.0.3",
