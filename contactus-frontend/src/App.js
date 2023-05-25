@@ -9,6 +9,8 @@ import { encrypt, decrypt } from "./encryptDecrypt";
 import * as bs58 from "bs58";
 
 function App() {
+
+  const [message, setMessage] = useState("");
   const [encryptedMessage, setEncryptedMessage] = useState("");
   const [decryptedMessage, setDecryptedMessage] = useState("");
 
@@ -57,6 +59,8 @@ function App() {
 
       const message = JSON.stringify(data);
 
+      setMessage(message);
+
       const encrypted = encrypt(
         message,
         nonce,
@@ -97,9 +101,11 @@ function App() {
       <h1>Contact Us</h1>
       <div style={{ "text-align": "center", color: "white" }}>
         <div style={{'text-align': '-webkit-center'}}>
-          <h2>Encrypted message:</h2>
+          <h2>Data to be sent:</h2>
+          <h2>{message}</h2>
+          <h2>Encrypted data:</h2>
           <h2 style={{ maxWidth: "800px", wordWrap: "break-word" }}>{encryptedMessage}</h2>
-          <h2>Decrypted message:</h2>
+          <h2>Decrypted data:</h2>
           <h2>{decryptedMessage}</h2>
         </div>
       </div>
