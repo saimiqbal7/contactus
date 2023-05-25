@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Contact Us Frontend   
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+This is the frontend for the Contact Us application. It is a React application. It provide functions that encrypt and decrypt messages. It also provides a form to send messages to the backend.
 
-In the project directory, you can run:
+## Getting Started
 
-### `npm start`
+### Install dependencies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm install
+or
+yarn install
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Configure the .env file
 
-### `npm test`
+Set up the .env file with the following variables:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+REACT_APP_TASK_CREATOR_PUBLIC_KEY="<task creator public key>"
+REACT_APP_TASK_CREATOR_PRIVATE_KEY='<task creator private key>'
+REACT_APP_TASK_SENDER_PUBLIC_KEY='<task sender public key>'
+REACT_APP_TASK_SENDER_PRIVATE_KEY='<task sender public key>'
+REACT_APP_TASK_ID=''
+```
 
-### `npm run build`
+### Fill out the form
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Run `yarn start` to start the App. Fill out the form and submit it. The data will be encrypted and sent to the task node.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+It will also show the encrypted data and the decrypted data.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Encrypting form data
 
-### `npm run eject`
+After the data is entered, it is encrypted to the public address and host it on one of the task nodes running that task. It use package `solana-encryption` to encrypt the data. In the back end when you fetch the data, you can use the same package to decrypt the data. Check `App.js` file `line:42` to `line:56` for more details.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Submitting to the p2p database
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The task nodes running the contact-us task are responsible for holding the encrypted payload by using the `nedb`. The encrypted data will be stored in the database and the task node will also upload the data to the IPFS. It will return the cid of the data on the IPFS. The user can use the cid to retrieve the data from the task node.

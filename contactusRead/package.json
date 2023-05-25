@@ -12,7 +12,9 @@
   "dependencies": {
     "axios": "^1.4.0",
     "bs58": "^5.0.0",
+    "dotenv": "^16.0.3",
     "ed2curve": "^0.3.0",
+    "solana-encryption": "^1.0.5",
     "web3.storage": "^4.5.4"
   }
 }

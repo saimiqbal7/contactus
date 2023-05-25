@@ -3,10 +3,8 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./styles.css";
 import { RecoilRoot } from "recoil";
-import * as nacl from "tweetnacl";
-import * as ed2curve from "ed2curve";
-import { encrypt, decrypt } from "./encryptDecrypt";
-import * as bs58 from "bs58";
+import { encrypt, decrypt, nonce } from "solana-encryption";
+// import { encrypt, decrypt, nonce } from "./encryptDecrypt";
 
 function App() {
 
@@ -29,33 +27,17 @@ function App() {
     try {
       // console.log(data);
 
-      const publicKeyA = "4VRqZyNrGUpApvgXAV39B342qdHTq9PGS2WbT55XzeaA";
-      const privateKeyA = new Uint8Array([
-        132, 74, 129, 68, 65, 80, 64, 127, 108, 40, 189, 220, 216, 232, 242, 66,
-        61, 156, 83, 28, 10, 14, 47, 249, 132, 229, 232, 201, 248, 73, 89, 152,
-        51, 219, 104, 59, 111, 32, 190, 25, 154, 141, 42, 177, 240, 132, 71,
-        138, 87, 151, 35, 81, 74, 93, 169, 249, 188, 36, 23, 55, 53, 130, 24,
-        255,
-      ]);
-      const publicKeyB = "DE9Bj5ZvuGaKzszMNH9kNZFUTtcsS61zkQk1osFCrD9R";
-      const privateKeyB = new Uint8Array([
-        178, 119, 119, 186, 189, 96, 234, 41, 118, 99, 34, 21, 5, 236, 129, 96,
-        236, 182, 201, 0, 240, 23, 63, 251, 17, 210, 203, 123, 112, 141, 96,
-        231, 181, 170, 12, 97, 4, 250, 99, 214, 92, 206, 137, 92, 57, 220, 203,
-        160, 122, 135, 126, 89, 168, 120, 211, 143, 116, 178, 56, 63, 251, 185,
-        61, 48,
-      ]);
+      const publicKeyA = process.env.REACT_APP_TASK_SENDER_PUBLIC_KEY;
 
-      const curve25519PublicKeyA = ed2curve.convertPublicKey(
-        bs58.decode(publicKeyA)
-      );
-      const curve25519PrivateKeyA = ed2curve.convertSecretKey(privateKeyA);
-      const curve25519PublicKeyB = ed2curve.convertPublicKey(
-        bs58.decode(publicKeyB)
-      );
-      const curve25519PrivateKeyB = ed2curve.convertSecretKey(privateKeyB);
+      const privateKeyAString = process.env.REACT_APP_TASK_SENDER_PRIVATE_KEY;
+      const privateKeyA = new Uint8Array(privateKeyAString.split(',').map(Number));
 
-      const nonce = nacl.randomBytes(nacl.box.nonceLength);
+      const publicKeyB = process.env.REACT_APP_TASK_CREATOR_PUBLIC_KEY;
+
+      const privateKeyBString = process.env.REACT_APP_TASK_CREATOR_PRIVATE_KEY;
+      const privateKeyB = new Uint8Array(privateKeyBString.split(',').map(Number));
+
+      const newNonce = nonce();
 
       const message = JSON.stringify(data);
 
@@ -63,24 +45,24 @@ function App() {
 
       const encrypted = encrypt(
         message,
-        nonce,
-        curve25519PublicKeyB,
-        curve25519PrivateKeyA
+        newNonce,
+        publicKeyB,
+        privateKeyA
       );
       setEncryptedMessage(encrypted);
 
       const decrypted = decrypt(
         encrypted,
-        nonce,
-        curve25519PublicKeyA,
-        curve25519PrivateKeyB
+        newNonce,
+        publicKeyA,
+        privateKeyB
       );
       setDecryptedMessage(decrypted);
 
 
       const payload = {
         encrypted,
-        nonce,
+        nonce: newNonce,
         publicKey: publicKeyA,
       }
 
@@ -101,9 +83,7 @@ function App() {
       <h1>Contact Us</h1>
       <div style={{ "text-align": "center", color: "white" }}>
         <div style={{'text-align': '-webkit-center'}}>
-          <h2>Data to be sent:</h2>
-          <h2>{message}</h2>
-          <h2>Encrypted data:</h2>
+          <h2>Encrypted message:</h2>
           <h2 style={{ maxWidth: "800px", wordWrap: "break-word" }}>{encryptedMessage}</h2>
           <h2>Decrypted data:</h2>
           <h2>{decryptedMessage}</h2>
