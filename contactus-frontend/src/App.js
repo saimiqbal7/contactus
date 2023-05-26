@@ -64,11 +64,12 @@ function App() {
       const payload = {
         encrypted,
         nonce: newNonce,
-        publicKey: publicKeyA,
+        publicKey: publicKeyB, // updated this to allow serverside verification
       }
 
       console.log("payload to send ", payload)
 
+      // TODO - look up nodes here
       const response = await axios.post("http://192.168.2.41:10000/contact", {
         payload,
       });

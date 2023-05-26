@@ -32,6 +32,11 @@ async function test_cidValidation(submission_value) {
   else return false; // if one of them is false, return false
 }
 
+
+// TODO - verify the section below to confirm whether the recipient pubkey
+// is on the list of verified recipients
+// Currently it appears we are verifiying if the sender is on a list,
+// but that will be unlikely as most senders are likely to be anonymous
 async function verifyContacts(proofs_list_object) {
   let allSignaturesValid = true;
   let AuthUserList = await db.getAllAuthLists();
@@ -50,9 +55,9 @@ async function verifyContacts(proofs_list_object) {
     //   "http://localhost:10000",
     // ]
 
-    // verify the signature of the Contact for each nodes
+    // verify the signature of the Contact for each node
     for (const nodeUrl of nodeUrlList) {
-      console.log('cheking Contact on ', nodeUrl);
+      console.log('checking Contact on ', nodeUrl);
 
       // get all Contact in this node
       const res = await axios.get(
