@@ -13,7 +13,7 @@ module.exports = async (submission_value, round) => {
   const outputraw = await dataFromCid(submission_value);
   const output = outputraw.data;
   console.log('OUTPUT', output);
-  console.log('RESPONSE DATA length', output.proofs[0].LENGTH);
+  console.log('RESPONSE DATA length', output.proofs.length);
   console.log('PUBLIC KEY', output.node_publicKey);
   console.log('SIGNATURE', output.node_signature);
 
@@ -56,11 +56,11 @@ async function verifyContacts(proofs_list_object) {
 
       // get all Contact in this node
       const res = await axios.get(
-        `${url}/task/${TASK_ID}/Contact/get/${publicKey}`,
+        `${nodeUrl}/task/${TASK_ID}/Contact/get/${publicKey}`,
       );
 
       // TEST hardcode the node endpoint
-      // const res = await axios.get(`${nodeUrl}/Contact/get/${publicKey}`);
+      // const res = await url axios.get(`${nodeUrl}/Contact/get/${publicKey}`);
 
       // check node's status
       if (res.status != 200) {
@@ -80,7 +80,7 @@ async function verifyContacts(proofs_list_object) {
         if (contact.publicKey.length == 42) { 
 
           // Verify the ETH signature
-          const { data, publicKey, signature } = payload;
+          const { data, publicKey, signature } = contact;
 
           // Decode the signature
           const signatureBuffer = bs58.decode(signature);

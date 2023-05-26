@@ -1,0 +1,627 @@
+Attaching to redis, task_node
+[36mredis        |[0m 1:C 26 May 2023 01:00:54.190 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+[36mredis        |[0m 1:C 26 May 2023 01:00:54.190 # Redis version=7.0.10, bits=64, commit=00000000, modified=0, pid=1, just started
+[36mredis        |[0m 1:C 26 May 2023 01:00:54.190 # Configuration loaded
+[36mredis        |[0m 1:M 26 May 2023 01:00:54.190 * monotonic clock: POSIX clock_gettime
+[36mredis        |[0m 1:M 26 May 2023 01:00:54.190 * Running mode=standalone, port=6379.
+[36mredis        |[0m 1:M 26 May 2023 01:00:54.190 # Server initialized
+[36mredis        |[0m 1:M 26 May 2023 01:00:54.190 # WARNING Memory overcommit must be enabled! Without it, a background save or replication may fail under low memory condition. Being disabled, it can can also cause failures without low memory condition, see https://github.com/jemalloc/jemalloc/issues/1328. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+[36mredis        |[0m 1:M 26 May 2023 01:00:54.196 * Creating AOF base file appendonly.aof.1.base.rdb on server start
+[36mredis        |[0m 1:M 26 May 2023 01:00:54.209 * Creating AOF incr file appendonly.aof.1.incr.aof on server start
+[36mredis        |[0m 1:M 26 May 2023 01:00:54.209 * Ready to accept connections
+[33mtask_node    |[0m yarn run v1.22.19
+[33mtask_node    |[0m $ npm run autostake && npm run start
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[33mtask_node    |[0m > npm run build
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[33mtask_node    |[0m > npm run lint
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[33mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[33mtask_node    |[0m 
+[33mtask_node    |[0m npm notice 
+[33mtask_node    |[0m npm notice New patch version of npm available! 9.6.2 -> 9.6.7
+[33mtask_node    |[0m npm notice Changelog: <https://github.com/npm/cli/releases/tag/v9.6.7>
+[33mtask_node    |[0m npm notice Run `npm install -g npm@9.6.7` to update!
+[33mtask_node    |[0m npm notice 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[33mtask_node    |[0m > tsc -p tsconfig.release.json
+[33mtask_node    |[0m 
+[33mtask_node    |[0m npm notice 
+[33mtask_node    |[0m npm notice New patch version of npm available! 9.6.2 -> 9.6.7
+[33mtask_node    |[0m npm notice Changelog: <https://github.com/npm/cli/releases/tag/v9.6.7>
+[33mtask_node    |[0m npm notice Run `npm install -g npm@9.6.7` to update!
+[33mtask_node    |[0m npm notice 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[33mtask_node    |[0m > node build/src/cli/auto-stake.js
+[33mtask_node    |[0m 
+[33mtask_node    |[0m undefined
+[33mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[33mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[33mtask_node    |[0m                   ^
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Error: Invalid Wallet Path
+[33mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[33mtask_node    |[0m     at Generator.next (<anonymous>)
+[33mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[33mtask_node    |[0m     at new Promise (<anonymous>)
+[33mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[33mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[33mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[33mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[33mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[33mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Node.js v18.15.0
+[33mtask_node    |[0m npm notice 
+[33mtask_node    |[0m npm notice New patch version of npm available! 9.6.2 -> 9.6.7
+[33mtask_node    |[0m npm notice Changelog: <https://github.com/npm/cli/releases/tag/v9.6.7>
+[33mtask_node    |[0m npm notice Run `npm install -g npm@9.6.7` to update!
+[33mtask_node    |[0m npm notice 
+[33mtask_node    |[0m error Command failed with exit code 1.
+[33mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[33mtask_node    |[0m yarn run v1.22.19
+[33mtask_node    |[0m $ npm run autostake && npm run start
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[33mtask_node    |[0m > npm run build
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[33mtask_node    |[0m > npm run lint
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[33mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[33mtask_node    |[0m > tsc -p tsconfig.release.json
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[33mtask_node    |[0m > node build/src/cli/auto-stake.js
+[33mtask_node    |[0m 
+[33mtask_node    |[0m undefined
+[33mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[33mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[33mtask_node    |[0m                   ^
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Error: Invalid Wallet Path
+[33mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[33mtask_node    |[0m     at Generator.next (<anonymous>)
+[33mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[33mtask_node    |[0m     at new Promise (<anonymous>)
+[33mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[33mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[33mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[33mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[33mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[33mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Node.js v18.15.0
+[33mtask_node    |[0m error Command failed with exit code 1.
+[33mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[33mtask_node    |[0m yarn run v1.22.19
+[33mtask_node    |[0m $ npm run autostake && npm run start
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[33mtask_node    |[0m > npm run build
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[33mtask_node    |[0m > npm run lint
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[33mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[33mtask_node    |[0m > tsc -p tsconfig.release.json
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[33mtask_node    |[0m > node build/src/cli/auto-stake.js
+[33mtask_node    |[0m 
+[33mtask_node    |[0m undefined
+[33mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[33mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[33mtask_node    |[0m                   ^
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Error: Invalid Wallet Path
+[33mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[33mtask_node    |[0m     at Generator.next (<anonymous>)
+[33mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[33mtask_node    |[0m     at new Promise (<anonymous>)
+[33mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[33mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[33mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[33mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[33mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[33mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Node.js v18.15.0
+[33mtask_node    |[0m error Command failed with exit code 1.
+[33mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[33mtask_node    |[0m yarn run v1.22.19
+[33mtask_node    |[0m $ npm run autostake && npm run start
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[33mtask_node    |[0m > npm run build
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[33mtask_node    |[0m > npm run lint
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[33mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[33mtask_node    |[0m > tsc -p tsconfig.release.json
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[33mtask_node    |[0m > node build/src/cli/auto-stake.js
+[33mtask_node    |[0m 
+[33mtask_node    |[0m undefined
+[33mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[33mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[33mtask_node    |[0m                   ^
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Error: Invalid Wallet Path
+[33mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[33mtask_node    |[0m     at Generator.next (<anonymous>)
+[33mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[33mtask_node    |[0m     at new Promise (<anonymous>)
+[33mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[33mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[33mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[33mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[33mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[33mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Node.js v18.15.0
+[33mtask_node    |[0m error Command failed with exit code 1.
+[33mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[33mtask_node    |[0m yarn run v1.22.19
+[33mtask_node    |[0m $ npm run autostake && npm run start
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[33mtask_node    |[0m > npm run build
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[33mtask_node    |[0m > npm run lint
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[33mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[33mtask_node    |[0m > tsc -p tsconfig.release.json
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[33mtask_node    |[0m > node build/src/cli/auto-stake.js
+[33mtask_node    |[0m 
+[33mtask_node    |[0m undefined
+[33mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[33mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[33mtask_node    |[0m                   ^
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Error: Invalid Wallet Path
+[33mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[33mtask_node    |[0m     at Generator.next (<anonymous>)
+[33mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[33mtask_node    |[0m     at new Promise (<anonymous>)
+[33mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[33mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[33mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[33mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[33mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[33mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Node.js v18.15.0
+[33mtask_node    |[0m error Command failed with exit code 1.
+[33mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[33mtask_node    |[0m yarn run v1.22.19
+[33mtask_node    |[0m $ npm run autostake && npm run start
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[33mtask_node    |[0m > npm run build
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[33mtask_node    |[0m > npm run lint
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[33mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[33mtask_node    |[0m > tsc -p tsconfig.release.json
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[33mtask_node    |[0m > node build/src/cli/auto-stake.js
+[33mtask_node    |[0m 
+[33mtask_node    |[0m undefined
+[33mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[33mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[33mtask_node    |[0m                   ^
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Error: Invalid Wallet Path
+[33mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[33mtask_node    |[0m     at Generator.next (<anonymous>)
+[33mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[33mtask_node    |[0m     at new Promise (<anonymous>)
+[33mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[33mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[33mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[33mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[33mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[33mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Node.js v18.15.0
+[33mtask_node    |[0m error Command failed with exit code 1.
+[33mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[33mtask_node    |[0m yarn run v1.22.19
+[33mtask_node    |[0m $ npm run autostake && npm run start
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[33mtask_node    |[0m > npm run build
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[33mtask_node    |[0m > npm run lint
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[33mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[33mtask_node    |[0m > tsc -p tsconfig.release.json
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[33mtask_node    |[0m > node build/src/cli/auto-stake.js
+[33mtask_node    |[0m 
+[33mtask_node    |[0m undefined
+[33mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[33mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[33mtask_node    |[0m                   ^
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Error: Invalid Wallet Path
+[33mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[33mtask_node    |[0m     at Generator.next (<anonymous>)
+[33mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[33mtask_node    |[0m     at new Promise (<anonymous>)
+[33mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[33mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[33mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[33mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[33mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[33mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Node.js v18.15.0
+[33mtask_node    |[0m error Command failed with exit code 1.
+[33mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[33mtask_node    |[0m yarn run v1.22.19
+[33mtask_node    |[0m $ npm run autostake && npm run start
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[33mtask_node    |[0m > npm run build
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[33mtask_node    |[0m > npm run lint
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[33mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[33mtask_node    |[0m > tsc -p tsconfig.release.json
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[33mtask_node    |[0m > node build/src/cli/auto-stake.js
+[33mtask_node    |[0m 
+[33mtask_node    |[0m undefined
+[33mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[33mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[33mtask_node    |[0m                   ^
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Error: Invalid Wallet Path
+[33mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[33mtask_node    |[0m     at Generator.next (<anonymous>)
+[33mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[33mtask_node    |[0m     at new Promise (<anonymous>)
+[33mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[33mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[33mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[33mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[33mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[33mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Node.js v18.15.0
+[33mtask_node    |[0m error Command failed with exit code 1.
+[33mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[33mtask_node    |[0m yarn run v1.22.19
+[33mtask_node    |[0m $ npm run autostake && npm run start
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[33mtask_node    |[0m > npm run build
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[33mtask_node    |[0m > npm run lint
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[33mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[33mtask_node    |[0m > tsc -p tsconfig.release.json
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[33mtask_node    |[0m > node build/src/cli/auto-stake.js
+[33mtask_node    |[0m 
+[33mtask_node    |[0m undefined
+[33mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[33mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[33mtask_node    |[0m                   ^
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Error: Invalid Wallet Path
+[33mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[33mtask_node    |[0m     at Generator.next (<anonymous>)
+[33mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[33mtask_node    |[0m     at new Promise (<anonymous>)
+[33mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[33mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[33mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[33mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[33mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[33mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Node.js v18.15.0
+[33mtask_node    |[0m error Command failed with exit code 1.
+[33mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[33mtask_node    |[0m yarn run v1.22.19
+[33mtask_node    |[0m $ npm run autostake && npm run start
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[33mtask_node    |[0m > npm run build
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[33mtask_node    |[0m > npm run lint
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[33mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[33mtask_node    |[0m > tsc -p tsconfig.release.json
+[33mtask_node    |[0m 
+[33mtask_node    |[0m 
+[33mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[33mtask_node    |[0m > node build/src/cli/auto-stake.js
+[33mtask_node    |[0m 
+[33mtask_node    |[0m undefined
+[33mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[33mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[33mtask_node    |[0m                   ^
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Error: Invalid Wallet Path
+[33mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[33mtask_node    |[0m     at Generator.next (<anonymous>)
+[33mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[33mtask_node    |[0m     at new Promise (<anonymous>)
+[33mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[33mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[33mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[33mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[33mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[33mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[33mtask_node    |[0m 
+[33mtask_node    |[0m Node.js v18.15.0
+[33mtask_node    |[0m error Command failed with exit code 1.
+[33mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[33mtask_node exited with code 1
+[0m[32mtask_node    |[0m yarn run v1.22.19
+[32mtask_node    |[0m $ npm run autostake && npm run start
+[32mtask_node    |[0m 
+[32mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[32mtask_node    |[0m > npm run build
+[32mtask_node    |[0m 
+[32mtask_node    |[0m 
+[32mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[32mtask_node    |[0m > npm run lint
+[32mtask_node    |[0m 
+[32mtask_node    |[0m 
+[32mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[32mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[32mtask_node    |[0m 
+[32mtask_node    |[0m 
+[32mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[32mtask_node    |[0m > tsc -p tsconfig.release.json
+[32mtask_node    |[0m 
+[32mtask_node    |[0m 
+[32mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[32mtask_node    |[0m > node build/src/cli/auto-stake.js
+[32mtask_node    |[0m 
+[32mtask_node    |[0m undefined
+[32mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[32mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[32mtask_node    |[0m                   ^
+[32mtask_node    |[0m 
+[32mtask_node    |[0m Error: Invalid Wallet Path
+[32mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[32mtask_node    |[0m     at Generator.next (<anonymous>)
+[32mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[32mtask_node    |[0m     at new Promise (<anonymous>)
+[32mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[32mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[32mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[32mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[32mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[32mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[32mtask_node    |[0m 
+[32mtask_node    |[0m Node.js v18.15.0
+[32mtask_node    |[0m error Command failed with exit code 1.
+[32mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[35mtask_node    |[0m yarn run v1.22.19
+[35mtask_node    |[0m $ npm run autostake && npm run start
+[35mtask_node    |[0m 
+[35mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[35mtask_node    |[0m > npm run build
+[35mtask_node    |[0m 
+[35mtask_node    |[0m 
+[35mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[35mtask_node    |[0m > npm run lint
+[35mtask_node    |[0m 
+[35mtask_node    |[0m 
+[35mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[35mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[35mtask_node    |[0m 
+[35mtask_node    |[0m 
+[35mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[35mtask_node    |[0m > tsc -p tsconfig.release.json
+[35mtask_node    |[0m 
+[35mtask_node    |[0m 
+[35mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[35mtask_node    |[0m > node build/src/cli/auto-stake.js
+[35mtask_node    |[0m 
+[35mtask_node    |[0m undefined
+[35mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[35mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[35mtask_node    |[0m                   ^
+[35mtask_node    |[0m 
+[35mtask_node    |[0m Error: Invalid Wallet Path
+[35mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[35mtask_node    |[0m     at Generator.next (<anonymous>)
+[35mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[35mtask_node    |[0m     at new Promise (<anonymous>)
+[35mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[35mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[35mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[35mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[35mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[35mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[35mtask_node    |[0m 
+[35mtask_node    |[0m Node.js v18.15.0
+[35mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[35mtask_node    |[0m error Command failed with exit code 1.
+[32mtask_node exited with code 1
+[0m[34mtask_node    |[0m yarn run v1.22.19
+[34mtask_node    |[0m $ npm run autostake && npm run start
+[34mtask_node    |[0m 
+[34mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[34mtask_node    |[0m > npm run build
+[34mtask_node    |[0m 
+[34mtask_node    |[0m 
+[34mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[34mtask_node    |[0m > npm run lint
+[34mtask_node    |[0m 
+[34mtask_node    |[0m 
+[34mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[34mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[34mtask_node    |[0m 
+[34mtask_node    |[0m 
+[34mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[34mtask_node    |[0m > tsc -p tsconfig.release.json
+[34mtask_node    |[0m 
+[34mtask_node    |[0m 
+[34mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[34mtask_node    |[0m > node build/src/cli/auto-stake.js
+[34mtask_node    |[0m 
+[34mtask_node    |[0m undefined
+[34mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[34mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[34mtask_node    |[0m                   ^
+[34mtask_node    |[0m 
+[34mtask_node    |[0m Error: Invalid Wallet Path
+[34mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[34mtask_node    |[0m     at Generator.next (<anonymous>)
+[34mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[34mtask_node    |[0m     at new Promise (<anonymous>)
+[34mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[34mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[34mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[34mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[34mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[34mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[34mtask_node    |[0m 
+[34mtask_node    |[0m Node.js v18.15.0
+[34mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[34mtask_node    |[0m error Command failed with exit code 1.
+[35mtask_node exited with code 1
+[0m[36;1mtask_node    |[0m yarn run v1.22.19
+[36;1mtask_node    |[0m $ npm run autostake && npm run start
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m > @koii-network/task-node@1.2.2 preautostake
+[36;1mtask_node    |[0m > npm run build
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m > @koii-network/task-node@1.2.2 prebuild
+[36;1mtask_node    |[0m > npm run lint
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m > @koii-network/task-node@1.2.2 lint
+[36;1mtask_node    |[0m > eslint . --quiet --ext .ts,.tsx
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m > @koii-network/task-node@1.2.2 build
+[36;1mtask_node    |[0m > tsc -p tsconfig.release.json
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m > @koii-network/task-node@1.2.2 autostake
+[36;1mtask_node    |[0m > node build/src/cli/auto-stake.js
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m undefined
+[36;1mtask_node    |[0m /app/build/src/cli/auto-stake.js:25
+[36;1mtask_node    |[0m             throw Error('Invalid Wallet Path');
+[36;1mtask_node    |[0m                   ^
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m Error: Invalid Wallet Path
+[36;1mtask_node    |[0m     at /app/build/src/cli/auto-stake.js:25:19
+[36;1mtask_node    |[0m     at Generator.next (<anonymous>)
+[36;1mtask_node    |[0m     at /app/node_modules/tslib/tslib.js:117:75
+[36;1mtask_node    |[0m     at new Promise (<anonymous>)
+[36;1mtask_node    |[0m     at __awaiter (/app/node_modules/tslib/tslib.js:113:16)
+[36;1mtask_node    |[0m     at main (/app/build/src/cli/auto-stake.js:16:34)
+[36;1mtask_node    |[0m     at Object.<anonymous> (/app/build/src/cli/auto-stake.js:85:1)
+[36;1mtask_node    |[0m     at Module._compile (node:internal/modules/cjs/loader:1254:14)
+[36;1mtask_node    |[0m     at Module._extensions..js (node:internal/modules/cjs/loader:1308:10)
+[36;1mtask_node    |[0m     at Module.load (node:internal/modules/cjs/loader:1117:32)
+[36;1mtask_node    |[0m 
+[36;1mtask_node    |[0m Node.js v18.15.0
+[36;1mtask_node    |[0m info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+[36;1mtask_node    |[0m error Command failed with exit code 1.
+[34mtask_node exited with code 1
+[0m[36;1mtask_node exited with code 1
+[0m[36mredis        |[0m 1:signal-handler (1685063384) Received SIGTERM scheduling shutdown...
+[36mredis        |[0m 1:M 26 May 2023 01:09:44.709 # User requested shutdown...
+[36mredis        |[0m 1:M 26 May 2023 01:09:44.709 * Calling fsync() on the AOF file.
+[36mredis        |[0m 1:M 26 May 2023 01:09:44.709 * Saving the final RDB snapshot before exiting.
+[36mredis        |[0m 1:M 26 May 2023 01:09:44.718 * DB saved on disk
+[36mredis        |[0m 1:M 26 May 2023 01:09:44.718 # Redis is now ready to exit, bye bye...
+[36mredis exited with code 0
+[0m
