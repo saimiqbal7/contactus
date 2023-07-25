@@ -91,7 +91,7 @@ router.get('/contact/:publicKey', async (req, res) => {
 });
 
 // returns list of all contacts
-router.get('/contact/list', async (req, res) => {
+router.get('/contactList', async (req, res) => {
   let contactList = (await db.getAllContacts()) || '[]';
   console.log(contactList)
   return res.status(200).send(contactList);
@@ -106,13 +106,13 @@ router.get('/proofs/:publicKey', async (req, res) => {
 });
 
 // return list of all proofs
-router.get('/proofs/list', async (req, res) => {
+router.get('/proofsList', async (req, res) => {
   let proofsList = (await db.getAllProofs());
   return res.status(200).send(proofsList);
 });
 
 // returns 'proofs' aka encrypted contact us submissions to verify receipt of submissions
-router.get('/nodeproofs/list', async (req, res) => {
+router.get('/nodeproofsList', async (req, res) => {
   contactNodeProofs = (await db.getAllNodeProofCids()) || '[]';
   return res.status(200).send(contactNodeProofs);
 });
