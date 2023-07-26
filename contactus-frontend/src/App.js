@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import "./styles.css";
 import { RecoilRoot } from "recoil";
 import { encrypt, decrypt, nonce } from "solana-encryption";
-import { Keypair } from "@solana/web3.js"; 
+import { Keypair } from "@solana/web3.js";
+import { setContact } from "./api";
+import { getNodeList } from "./helpers";
 
 function App() {
-
   const [message, setMessage] = useState("");
   const [encryptedMessage, setEncryptedMessage] = useState("");
   const [decryptedMessage, setDecryptedMessage] = useState("");
+  const [nodeList, setNodeList] = useState(null);
 
   const {
     register,
@@ -18,8 +19,15 @@ function App() {
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    const listOfNodes = async () => {
+      const list = await getNodeList();
+      setNodeList(list);
+    };
+    listOfNodes();
+  }, []);
+
   const onSubmit = (data) => {
-    console.log(data);
     sendData(data);
   }; // your form submit function which will invoke after successful validation
 
@@ -30,13 +38,11 @@ function App() {
       const keypairA = Keypair.generate();
       const keypairB = Keypair.generate();
 
-      const publicKeyA = keypairA.publicKey.toBase58()  ;
+      const publicKeyA = keypairA.publicKey.toBase58();
       const privateKeyA = keypairA.secretKey;
 
       const publicKeyB = keypairB.publicKey.toBase58();
       const privateKeyB = keypairB.secretKey;
-
-   
 
       const newNonce = nonce();
 
@@ -44,36 +50,21 @@ function App() {
 
       setMessage(message);
 
-      const encrypted = encrypt(
-        message,
-        newNonce,
-        publicKeyB,
-        privateKeyA
-      );
+      const encrypted = encrypt(message, newNonce, publicKeyB, privateKeyA);
       setEncryptedMessage(encrypted);
 
-      const decrypted = decrypt(
-        encrypted,
-        newNonce,
-        publicKeyA,
-        privateKeyB
-      );
+      const decrypted = decrypt(encrypted, newNonce, publicKeyA, privateKeyB);
       setDecryptedMessage(decrypted);
-
 
       const payload = {
         encrypted,
         nonce: newNonce,
         publicKey: publicKeyA,
-      }
+      };
 
-      console.log("payload to send ", payload)
+      // console.log("payload to send ", payload);
 
-      const response = await axios.post("http://192.168.2.41:10000/contact", {
-        payload,
-      });
-
-      console.log(response);
+      await setContact(nodeList, payload);
     } catch (error) {
       console.error("Error posting data: ", error);
     }
@@ -83,9 +74,11 @@ function App() {
     <RecoilRoot>
       <h1>Contact Us</h1>
       <div style={{ "text-align": "center", color: "white" }}>
-        <div style={{'text-align': '-webkit-center'}}>
+        <div style={{ "text-align": "-webkit-center" }}>
           <h2>Encrypted message:</h2>
-          <h2 style={{ maxWidth: "800px", wordWrap: "break-word" }}>{encryptedMessage}</h2>
+          <h2 style={{ maxWidth: "800px", wordWrap: "break-word" }}>
+            {encryptedMessage}
+          </h2>
           <h2>Decrypted data:</h2>
           <h2>{decryptedMessage}</h2>
         </div>
@@ -99,7 +92,7 @@ function App() {
         <label>Name</label>
         <input {...register("name", { required: true })} />
         {errors.name && <p>This field is required</p>}
-        
+
         <label>Message</label>
         <textarea
           style={{
@@ -107,13 +100,13 @@ function App() {
             height: "8em",
             boxSizing: "border-box",
             resize: "none",
-            borderRadius: '4px',
-            border: '1px solid white',
-            padding: '10px 15px'
+            borderRadius: "4px",
+            border: "1px solid white",
+            padding: "10px 15px",
           }}
-          {...register("message", {required: false})}
+          {...register("message", { required: false })}
         ></textarea>
-        <input type="submit" />
+        <input type='submit' />
       </form>
     </RecoilRoot>
   );

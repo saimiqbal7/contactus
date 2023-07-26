@@ -46,11 +46,10 @@ router.post('/contact', async (req, res) => {
   let publicKey = contact.publicKey;
   let nonce = contact.nonce;
 
-
   let proof = {
     encrypted,
     nonce,
-    publicKey
+    publicKey,
   };
   console.log('Check Proof:', proof);
 
@@ -72,7 +71,10 @@ router.post('/contact', async (req, res) => {
 
   return res
     .status(200)
-    .send({ message: 'Proof and contact registered successfully', data: req.body.payload });
+    .send({
+      message: 'Proof and contact registered successfully',
+      data: req.body.payload,
+    });
 });
 
 // For debugging
@@ -80,7 +82,6 @@ router.get('/logs', async (req, res) => {
   const logs = fs.readFileSync('./namespace/logs.txt', 'utf8');
   res.status(200).send(logs);
 });
-
 
 // returns a contact for a particular public key
 router.get('/contact/:publicKey', async (req, res) => {
@@ -93,7 +94,7 @@ router.get('/contact/:publicKey', async (req, res) => {
 // returns list of all contacts
 router.get('/contactList', async (req, res) => {
   let contactList = (await db.getAllContacts()) || '[]';
-  console.log(contactList)
+  console.log(contactList);
   return res.status(200).send(contactList);
 });
 
@@ -107,7 +108,7 @@ router.get('/proofs/:publicKey', async (req, res) => {
 
 // return list of all proofs
 router.get('/proofsList', async (req, res) => {
-  let proofsList = (await db.getAllProofs());
+  let proofsList = await db.getAllProofs();
   return res.status(200).send(proofsList);
 });
 
