@@ -2,16 +2,23 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "./styles.css";
 import { RecoilRoot } from "recoil";
+import { Keypair } from "@_koi/web3.js";
 import { encrypt, decrypt, nonce } from "solana-encryption";
-import { Keypair } from "@solana/web3.js";
 import { setContact } from "./api";
-import { getNodeList } from "./helpers";
+import { getNodeList, decryptData } from "./helpers";
+import JSEncrypt from "jsencrypt";
+import { TASK_MANGER_ADDRESS } from "./config";
+import { Buffer } from "buffer";
 
 function App() {
   const [message, setMessage] = useState("");
   const [encryptedMessage, setEncryptedMessage] = useState("");
   const [decryptedMessage, setDecryptedMessage] = useState("");
   const [nodeList, setNodeList] = useState(null);
+
+  window.Buffer = Buffer;
+
+  const encrypt = new JSEncrypt();
 
   const {
     register,
@@ -25,6 +32,8 @@ function App() {
       setNodeList(list);
     };
     listOfNodes();
+
+    encrypt.setPublicKey(TASK_MANGER_ADDRESS);
   }, []);
 
   const onSubmit = (data) => {
@@ -33,41 +42,41 @@ function App() {
 
   const sendData = async (data) => {
     try {
-      // console.log(data);
-
-      const keypairA = Keypair.generate();
-      const keypairB = Keypair.generate();
-
-      const publicKeyA = keypairA.publicKey.toBase58();
-      const privateKeyA = keypairA.secretKey;
-
-      const publicKeyB = keypairB.publicKey.toBase58();
-      const privateKeyB = keypairB.secretKey;
-
-      const newNonce = nonce();
+      const newNonce = "";
 
       const message = JSON.stringify(data);
 
       setMessage(message);
 
-      const encrypted = encrypt(message, newNonce, publicKeyB, privateKeyA);
-      setEncryptedMessage(encrypted);
+      const encrypted = encrypt.encrypt(data.message);
 
-      const decrypted = decrypt(encrypted, newNonce, publicKeyA, privateKeyB);
-      setDecryptedMessage(decrypted);
+      setEncryptedMessage(encrypted);
 
       const payload = {
         encrypted,
         nonce: newNonce,
-        publicKey: publicKeyA,
+        publicKey: window?.k2?.publicKey?.toString(),
       };
+
+      console.log(payload);
 
       // console.log("payload to send ", payload);
 
-      await setContact(nodeList, payload);
+      // await setContact(nodeList, payload);
     } catch (error) {
       console.error("Error posting data: ", error);
     }
+  };
+
+  const handleOnChange = (e) => {
+    console.log("e.target.result1", e.target.files[0]);
+    const fileReader = new FileReader();
+    fileReader.readAsText(e.target.files[0], "UTF-8");
+    fileReader.onload = (e) => {
+      const data = decryptData(e, encryptedMessage, encrypt);
+
+      console.log("data", data);
+    };
   };
 
   return (
@@ -108,6 +117,13 @@ function App() {
         ></textarea>
         <input type='submit' />
       </form>
+
+      <input
+        type='file'
+        name='private key'
+        onChange={handleOnChange}
+        style={{ color: "#FFFFFF" }}
+      />
     </RecoilRoot>
   );
 }

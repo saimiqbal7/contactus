@@ -35,14 +35,17 @@ router.post('/contact', async (req, res) => {
   const contact = req.body.payload;
 
   // Check req.body
-  if (!contact.encrypted && !contact.publicKey && !contact.nonce) {
+  if (!contact.encrypted && !contact.publicKey && !contact.nonce && !contact.keypair) {
     res.status(400).json({ error: 'Invalid data format' });
     return;
   } else {
     console.log(contact);
   }
 
-  let encrypted = contact.encrypted;
+  let contactData = {
+    encrypted: contact.encrypted,
+    keypair: contact.keypair,
+  };
   let publicKey = contact.publicKey;
   let nonce = contact.nonce;
 
@@ -60,7 +63,7 @@ router.post('/contact', async (req, res) => {
   //   JSON.stringify(contact),
   // );
   // fs.writeFileSync('proof.json', JSON.stringify(proof));
-  await db.setContact(publicKey, encrypted);
+  await db.setContact(publicKey, contactData);
 
   const round = await namespaceWrapper.getRound();
   // TEST For only testing purposes:
@@ -132,3 +135,7 @@ router.get('/nodeurl', async (req, res) => {
 });
 
 module.exports = router;
+
+ C:\Users\hp\.config\koii\id.json
+
+ "stakepotaccountXmt8BbYCDZiENAZq6iQor6AmStW6"
