@@ -6,6 +6,7 @@ import { encrypt, decrypt, nonce } from "solana-encryption";
 import { Keypair } from "@solana/web3.js";
 import { setContact } from "./api";
 import { getNodeList } from "./helpers";
+import { TASK_MANAGER_ADDRESS } from "./config";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -36,13 +37,10 @@ function App() {
       // console.log(data);
 
       const keypairA = Keypair.generate();
-      const keypairB = Keypair.generate();
+      // const keypairB = Keypair.generate();
 
       const publicKeyA = keypairA.publicKey.toBase58();
       const privateKeyA = keypairA.secretKey;
-
-      const publicKeyB = keypairB.publicKey.toBase58();
-      const privateKeyB = keypairB.secretKey;
 
       const newNonce = nonce();
 
@@ -50,7 +48,12 @@ function App() {
 
       setMessage(message);
 
-      const encrypted = encrypt(message, newNonce, publicKeyB, privateKeyA);
+      const encrypted = encrypt(
+        message,
+        newNonce,
+        TASK_MANAGER_ADDRESS,
+        privateKeyA
+      );
       setEncryptedMessage(encrypted);
 
       const decrypted = decrypt(encrypted, newNonce, publicKeyA, privateKeyB);
