@@ -25,3 +25,11 @@ export const getNodeList = async () => {
 
   return nodeList;
 };
+
+export const decryptData = (e, encryptedMessage) => {
+  console.log("e.target.result", e.target.result);
+  const jsonKey = JSON.parse(e?.target?.result);
+  const mainWallet = Buffer.from(jsonKey, "base64");
+
+  return null;
+};
