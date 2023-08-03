@@ -28,7 +28,7 @@ minimum_stake_amount: 5
 
 # total_bounty_amount cannot be grater than bounty_amount_per_round
 # total bounty is not accepted in case of update task
-total_bounty_amount: 10
+total_bounty_amount: 40
 
 bounty_amount_per_round: 1
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { TASK_ADDRESS } from "../config";
+import { Keypair } from "@solana/web3.js";
 export const getNodeList = async () => {
   let nodeList = [];
   const fallbackNodes = [
@@ -29,7 +30,9 @@ export const getNodeList = async () => {
 export const getPrivateKey = (e) => {
   console.log("e.target.result", e.target.result);
   const jsonKey = JSON.parse(e?.target?.result);
-  const mainWallet = Buffer.from(jsonKey, "base64");
+  const mainWallet = Keypair.fromSecretKey(Buffer.from(jsonKey, "base64"));
 
-  return mainWallet;
+  console.log(mainWallet.secretKey, mainWallet.publicKey.toString());
+
+  return mainWallet.secretKey;
 };

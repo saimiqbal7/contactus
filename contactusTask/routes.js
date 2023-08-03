@@ -60,7 +60,7 @@ router.post('/contact', async (req, res) => {
   //   JSON.stringify(contact),
   // );
   // fs.writeFileSync('proof.json', JSON.stringify(proof));
-  await db.setContact(publicKey, encrypted);
+  await db.setContact(publicKey, proof);
 
   const round = await namespaceWrapper.getRound();
   // TEST For only testing purposes:
@@ -69,12 +69,10 @@ router.post('/contact', async (req, res) => {
   console.log(`${publicKey} Proofs: `, proof);
   await db.setProofs(publicKey, proof);
 
-  return res
-    .status(200)
-    .send({
-      message: 'Proof and contact registered successfully',
-      data: req.body.payload,
-    });
+  return res.status(200).send({
+    message: 'Proof and contact registered successfully',
+    data: req.body.payload,
+  });
 });
 
 // For debugging
