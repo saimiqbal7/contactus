@@ -73,6 +73,16 @@ function App() {
     }
   };
 
+  const handleOnChange = (e) => {
+    console.log("e.target.result1", e.target.files[0]);
+    const fileReader = new FileReader();
+    fileReader.readAsText(e.target.files[0], "UTF-8");
+    fileReader.onload = (e) => {
+      //  const data = decryptData(e, encryptedMessage, encrypt);
+      //  console.log("data", data);
+    };
+  };
+
   return (
     <RecoilRoot>
       <h1>Contact Us</h1>
