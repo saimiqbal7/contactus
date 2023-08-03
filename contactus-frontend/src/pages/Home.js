@@ -53,20 +53,13 @@ function Home() {
 
       setEncryptedMessage(encrypted);
 
-      console.log(
-        Buffer.from(encrypted, "Base64"),
-        Buffer.from(newNonce, "Base64"),
-        Buffer.from(encrypted).toString("base64"),
-        Buffer.from(newNonce).toString("base64")
-      );
-
       const payload = {
         encrypted: Buffer.from(encrypted, "base64"),
         nonce: Buffer.from(newNonce, "base64"),
         publicKey: publicKeyA,
       };
 
-      console.log("payload to send ", payload);
+      // console.log("payload to send ", payload);
 
       await setContact(nodeList, payload);
     } catch (error) {

@@ -14,7 +14,6 @@ export const getNodeList = async () => {
       `https://tasknet-ports-1.koii.live/nodes/${TASK_ADDRESS}`
     );
     for (let i = 0; i < nodeResponse.data.length; i++) {
-      console.log(nodeResponse);
       nodeList.push(nodeResponse.data[i].data.url);
     }
   } catch (error) {
@@ -31,8 +30,6 @@ export const getPrivateKey = (e) => {
   console.log("e.target.result", e.target.result);
   const jsonKey = JSON.parse(e?.target?.result);
   const mainWallet = Keypair.fromSecretKey(Buffer.from(jsonKey, "base64"));
-
-  console.log(mainWallet.secretKey, mainWallet.publicKey.toString());
 
   return mainWallet.secretKey;
 };

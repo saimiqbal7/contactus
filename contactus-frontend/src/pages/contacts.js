@@ -21,7 +21,6 @@ function Contacts() {
   }, []);
 
   const handleOnChange = (e) => {
-    console.log("e.target.result1", e.target.files[0]);
     const fileReader = new FileReader();
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = async (e) => {
@@ -39,7 +38,7 @@ function Contacts() {
         return JSON.parse(decrypted);
       });
 
-      console.log(contacts);
+      //   console.log(contacts);
 
       setContacts(contacts);
     };
