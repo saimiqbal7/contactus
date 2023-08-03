@@ -66,15 +66,17 @@ function Contacts() {
       })}
 
       {!contacts && (
-        <>
-          <p>Upload your taskCli private key</p>
+        <div className='input-container'>
+          <div style={{ color: "#ffffff", marginBottom: "20px" }}>
+            Upload your taskCli private key
+          </div>
           <input
             type='file'
             name='private key'
             onChange={handleOnChange}
             style={{ color: "#FFFFFF" }}
           />
-        </>
+        </div>
       )}
     </RecoilRoot>
   );

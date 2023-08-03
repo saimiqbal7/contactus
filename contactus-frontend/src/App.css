@@ -36,6 +36,15 @@
   margin-bottom: 20px;
 }
 
+.input-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 0 16px;
+  color: #ffffff;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
 .App-link {
   color: #61dafb;
 }
