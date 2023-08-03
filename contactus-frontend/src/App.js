@@ -5,14 +5,19 @@ import { RecoilRoot } from "recoil";
 import { encrypt, decrypt, nonce } from "solana-encryption";
 import { Keypair } from "@solana/web3.js";
 import { setContact } from "./api";
-import { getNodeList } from "./helpers";
+import { getNodeList, getPrivateKey } from "./helpers";
 import { TASK_MANAGER_ADDRESS } from "./config";
+import { Buffer } from "buffer";
 
 function App() {
   const [message, setMessage] = useState("");
   const [encryptedMessage, setEncryptedMessage] = useState("");
   const [decryptedMessage, setDecryptedMessage] = useState("");
   const [nodeList, setNodeList] = useState(null);
+  const [nonce, setNonce] = useState(null);
+  const [publicKeyA, setPublickeyA] = useState(null);
+
+  window.Buffer = Buffer;
 
   const {
     register,
@@ -47,6 +52,8 @@ function App() {
       const message = JSON.stringify(data);
 
       setMessage(message);
+      setNonce(nonce);
+      setPublickeyA(publicKeyA);
 
       const encrypted = encrypt(
         message,
@@ -56,18 +63,15 @@ function App() {
       );
       setEncryptedMessage(encrypted);
 
-      const decrypted = decrypt(encrypted, newNonce, publicKeyA, privateKeyB);
-      setDecryptedMessage(decrypted);
-
       const payload = {
         encrypted,
         nonce: newNonce,
         publicKey: publicKeyA,
       };
 
-      // console.log("payload to send ", payload);
+      console.log("payload to send ", payload);
 
-      await setContact(nodeList, payload);
+      // await setContact(nodeList, payload);
     } catch (error) {
       console.error("Error posting data: ", error);
     }
@@ -78,8 +82,15 @@ function App() {
     const fileReader = new FileReader();
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = (e) => {
-      //  const data = decryptData(e, encryptedMessage, encrypt);
-      //  console.log("data", data);
+      const privateKeyB = getPrivateKey(e);
+      const decrypted = decrypt(
+        encryptedMessage,
+        nonce,
+        publicKeyA,
+        privateKeyB
+      );
+      setDecryptedMessage(decrypted);
+      console.log("data", decrypted);
     };
   };
 
