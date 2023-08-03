@@ -14,7 +14,7 @@ function App() {
   const [encryptedMessage, setEncryptedMessage] = useState("");
   const [decryptedMessage, setDecryptedMessage] = useState("");
   const [nodeList, setNodeList] = useState(null);
-  const [nonce, setNonce] = useState(null);
+  const [newNonce, setNewNonce] = useState(null);
   const [publicKeyA, setPublickeyA] = useState(null);
 
   window.Buffer = Buffer;
@@ -49,10 +49,12 @@ function App() {
 
       const newNonce = nonce();
 
+      console.log(newNonce);
+
       const message = JSON.stringify(data);
 
       setMessage(message);
-      setNonce(nonce);
+      setNewNonce(newNonce);
       setPublickeyA(publicKeyA);
 
       const encrypted = encrypt(
@@ -83,12 +85,7 @@ function App() {
     fileReader.readAsText(e.target.files[0], "UTF-8");
     fileReader.onload = (e) => {
       const privateKeyB = getPrivateKey(e);
-      const decrypted = decrypt(
-        encryptedMessage,
-        nonce,
-        publicKeyA,
-        privateKeyB
-      );
+      const decrypted = decrypt(encryptedMessage, newNonce, publicKeyA, e);
       setDecryptedMessage(decrypted);
       console.log("data", decrypted);
     };
@@ -132,6 +129,13 @@ function App() {
         ></textarea>
         <input type='submit' />
       </form>
+
+      <input
+        type='file'
+        name='private key'
+        onChange={handleOnChange}
+        style={{ color: "#FFFFFF" }}
+      />
     </RecoilRoot>
   );
 }
