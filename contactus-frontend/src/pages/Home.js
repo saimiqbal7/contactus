@@ -55,7 +55,9 @@ function Home() {
 
       console.log(
         Buffer.from(encrypted, "Base64"),
-        Buffer.from(newNonce, "Base64")
+        Buffer.from(newNonce, "Base64"),
+        Buffer.from(encrypted).toString("base64"),
+        Buffer.from(newNonce).toString("base64")
       );
 
       const payload = {
@@ -66,7 +68,7 @@ function Home() {
 
       console.log("payload to send ", payload);
 
-      // await setContact(nodeList, payload);
+      await setContact(nodeList, payload);
     } catch (error) {
       console.error("Error posting data: ", error);
     }

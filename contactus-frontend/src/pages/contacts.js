@@ -27,59 +27,56 @@ function Contacts() {
     fileReader.onload = async (e) => {
       const privateKeyB = await getPrivateKey(e);
       const allContacts = await getAllContacts(nodeList);
-      const contacts = allContacts.slice(2).map((contact) => {
-        console.log(
-          new Uint8Array(contact?.encrypted),
-          new Uint8Array(contact?.nonce),
-          contact?.publicKey,
-          contact?.encrypted,
-          contact?.nonce
-        );
+      const contacts = allContacts?.map((contact) => {
+        const messageBuffer = Buffer.from(contact?.encrypted, "base64");
+        const nonceBuffer = Buffer.from(contact?.nonce, "base64");
         const decrypted = decrypt(
-          new Uint8Array(contact?.encrypted),
-          new Uint8Array(contact?.nonce),
+          new Uint8Array(messageBuffer.buffer),
+          new Uint8Array(nonceBuffer.buffer),
           contact?.publicKey,
           privateKeyB
         );
-        return decrypted;
+        return JSON.parse(decrypted);
       });
 
       console.log(contacts);
 
-      //   setContacts(contacts);
-
-      //   const decrypted = decrypt(
-      //     encryptedMessage,
-      //     newNonce,
-      //     publicKeyA,
-      //     privateKeyB
-      //   );
-      //   setDecryptedMessage(decrypted);
-      console.log("data", allContacts);
+      setContacts(contacts);
     };
   };
 
   return (
     <RecoilRoot>
       <h1>Contact Us</h1>
-      <div className='table-header'>
-        <div>Name</div>
-        <div>Email</div>
-        <div>Message</div>
-      </div>
+      {contacts && (
+        <div className='table-header'>
+          <div>Name</div>
+          <div>Email</div>
+          <div>Message</div>
+        </div>
+      )}
 
-      <div className='table-header'>
-        <div>Name</div>
-        <div>Email</div>
-        <div>Message</div>
-      </div>
+      {contacts?.map((contact) => {
+        return (
+          <div className='table-header'>
+            <div>{contact.name}</div>
+            <div>{contact.email}</div>
+            <div>{contact.message}</div>
+          </div>
+        );
+      })}
 
-      <input
-        type='file'
-        name='private key'
-        onChange={handleOnChange}
-        style={{ color: "#FFFFFF" }}
-      />
+      {!contacts && (
+        <>
+          <p>Upload your taskCli private key</p>
+          <input
+            type='file'
+            name='private key'
+            onChange={handleOnChange}
+            style={{ color: "#FFFFFF" }}
+          />
+        </>
+      )}
     </RecoilRoot>
   );
 }

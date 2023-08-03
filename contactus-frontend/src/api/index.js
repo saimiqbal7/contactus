@@ -41,7 +41,7 @@ export async function getAllContacts(nodeList) {
       if (result) {
         return result;
       }
-      return;
+      return [];
     }
   } catch (error) {
     console.log("Error getting node list:", error);
